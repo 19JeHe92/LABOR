@@ -3,14 +3,13 @@ using NewtonVR;
 
 public class SteamVRControllerAdder : MonoBehaviour {
 
+    public NVRHand nvrHand;
     private TeleportVive teleporterScript;
-    private NVRHand nvrHand;
 
-    //Adds the NVRHand as a controller for the Vive Teleporter
+    //Adds one NVRHand as a controller for the Vive Teleporter
 	void Awake () {
 
         teleporterScript = gameObject.GetComponent<TeleportVive>();
-        nvrHand = gameObject.GetComponent<NVRHand>();
 
         if(teleporterScript != null)
         {
@@ -20,7 +19,7 @@ public class SteamVRControllerAdder : MonoBehaviour {
             }
             else
             {
-                Debug.LogError("No NVRHand attached to SteamVRControllerAdder");
+                Debug.LogError("No NVRHand set in SteamVRControllerAdder");
             }
         }
         else
