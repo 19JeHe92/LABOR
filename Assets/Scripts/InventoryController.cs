@@ -32,7 +32,6 @@ public class InventoryController : MonoBehaviour
     {
         connectedHand = this.GetComponent<NVRHand>();
         inventorySound = GetComponent<AudioSource>();
-        inventory = new Inventory();
     }
 
     //Recaftor the pickup logic should not be part of the inventory logic
