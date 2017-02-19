@@ -7,7 +7,7 @@ public class SteamVRControllerAdder : MonoBehaviour {
     private TeleportVive teleporterScript;
 
     //Adds one NVRHand as a controller for the Vive Teleporter
-	void Awake () {
+	void Start () {
 
         teleporterScript = gameObject.GetComponent<TeleportVive>();
 
@@ -15,7 +15,9 @@ public class SteamVRControllerAdder : MonoBehaviour {
         {
             if (nvrHand != null)
             {
+                teleporterScript.Controllers = new SteamVR_TrackedObject[1];
                 teleporterScript.Controllers[0] = nvrHand.GetComponent<SteamVR_TrackedObject>();
+                Debug.Log("Controller added as teleporter");
             }
             else
             {
