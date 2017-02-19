@@ -1,32 +1,28 @@
 ﻿using UnityEngine;
 using NewtonVR;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(NVRHand))]
 public class InventoryController : MonoBehaviour
 {
-    public Transform knivesPos;
-    public Transform injectionsPos;
-    public Transform medicinePos;
-    public Transform weaponsPos;
-    public Transform bombsPos;
-    public Transform othersPos;
     public NVRButtons PickUpButton = NVRButtons.Trigger;
-    public NVRButtons ShowInventoryButton = NVRButtons.Touchpad;
+    public NVRButtons ShowInventoryButton = NVRButtons.ApplicationMenu;
     public GameObject InventoryObject;
-    public GameObject items;
-
-    public PickableItem knife;
-    public PickableItem bomb;
-    public PickableItem medicine;
-    public PickableItem waepon;
-    public PickableItem injection;
-    public PickableItem other;
+    public Text knivesAmountText;
+    public Text medicineAmountText;
+    public Text bombsAmountText;
+    public Text cardsAmountText;
+    public Text weaponsAmountText;
+    public Text injectionsAmountText;
 
     private NVRHand connectedHand;
     private AudioSource inventorySound;
-
-    [HideInInspector]
-    public Inventory inventory;
+    private int knivesAmount = 0;
+    private int medicineAmount = 0;
+    private int bombsAmount = 0;
+    private int cardsAmount = 0;
+    private int weaponsAmount = 0;
+    private int injectionsAmount = 0;
 
     void Awake()
     {
@@ -34,7 +30,6 @@ public class InventoryController : MonoBehaviour
         inventorySound = GetComponent<AudioSource>();
     }
 
-    //Recaftor the pickup logic should not be part of the inventory logic
     private void LateUpdate()
     {
         if (connectedHand.Inputs[PickUpButton].PressDown == true)
@@ -42,19 +37,19 @@ public class InventoryController : MonoBehaviour
             Debug.Log("Pickup");
             PickupClosest();
         }
-        if (connectedHand.Inputs[ShowInventoryButton].IsPressed == true)
+        if (connectedHand.Inputs[ShowInventoryButton].PressDown == true)
         {
             Debug.Log("Call/Hide inventory");
             if (!InventoryObject.active)
             {
                 InventoryObject.SetActive(true);
-                items.SetActive(true);
+                InventoryObject.transform.position = connectedHand.transform.position;
+                InventoryObject.transform.rotation = connectedHand.transform.rotation;
             }
-        }
-        else if(InventoryObject.active)
-        {
-            InventoryObject.SetActive(false);
-            items.SetActive(false);
+            else
+            {
+                InventoryObject.SetActive(false);
+            }
         }
     }
 
@@ -92,45 +87,103 @@ public class InventoryController : MonoBehaviour
     private void AddToInventory(PickableItem item)
     {
         //check which object type was picked
-        //add to  physical inventory
+        //add to inventory
         switch (item.objectType)
         {
             case InventoryObjectType.Knife :
                 Debug.Log("Knife added to inventory");
-                inventory.AddKnifes(item.amount);
+                knivesAmount++;
+                knivesAmountText.text = knivesAmount.ToString();
                 break;
             case InventoryObjectType.Injection:
                 Debug.Log("Injection added to inventory");
-                inventory.AddInjections(item.amount);
+                injectionsAmount++;
+                injectionsAmountText.text = injectionsAmount.ToString();
                 break;
             case InventoryObjectType.Medicine:
                 Debug.Log("Medicine added to inventory");
-                inventory.AddMedicine(item.amount);
+                medicineAmount++;
+                medicineAmountText.text = medicineAmount.ToString();
                 break;
             case InventoryObjectType.Weapon:
                 Debug.Log("Weapon added to inventory");
-                inventory.AddWeapons(item.amount);
+                weaponsAmount++;
+                weaponsAmountText.text = weaponsAmount.ToString();
                 break;
             case InventoryObjectType.Bomb:
                 Debug.Log("Bomb added to inventory");
-                inventory.AddBombs(item.amount);
+                bombsAmount++;
+                bombsAmountText.text = bombsAmount.ToString();
                 break;
-            case InventoryObjectType.Other:
-                Debug.Log("Other added to inventory");
-                inventory.AddOthers(item.amount);
+            case InventoryObjectType.Card:
+                Debug.Log("Card added to inventory");
+                cardsAmount++;
+                cardsAmountText.text = cardsAmount.ToString();
                 break;
         }
         item.gameObject.SetActive(false);
     }
 
-    public Inventory getInventory()
+    public bool RemovefromInventory(InventoryObjectType item)
     {
-        return inventory;
-    }
-
-    //TODO
-    private void removeFromInventory()
-    {
-       
+        bool success = false;
+        switch (item)
+        {
+            case InventoryObjectType.Knife:
+                if(knivesAmount > 0)
+                {
+                    Debug.Log("Knife removed from inventory");
+                    knivesAmount--;
+                    knivesAmountText.text = knivesAmount.ToString();
+                    success = true;
+                }
+                break;
+            case InventoryObjectType.Injection:
+                if (knivesAmount > 0)
+                {
+                    Debug.Log("Injection removed from inventory");
+                    injectionsAmount--;
+                    injectionsAmountText.text = injectionsAmount.ToString();
+                    success = true;
+                }
+                break;
+            case InventoryObjectType.Medicine:
+                if (medicineAmount > 0)
+                {
+                    Debug.Log("Medicine removed from inventory");
+                    medicineAmount--;
+                    medicineAmountText.text = medicineAmount.ToString();
+                    success = true;
+                }
+                break;
+            case InventoryObjectType.Weapon:
+                if(weaponsAmount > 0)
+                {
+                    Debug.Log("Weapon removed from inventory");
+                    weaponsAmount--;
+                    weaponsAmountText.text = weaponsAmount.ToString();
+                    success = true;
+                }
+                break;
+            case InventoryObjectType.Bomb:
+                if(bombsAmount > 0)
+                {
+                    Debug.Log("Bomb removed from inventory");
+                    bombsAmount--;
+                    bombsAmountText.text = bombsAmount.ToString();
+                    success = true;
+                }
+                break;
+            case InventoryObjectType.Card:
+                if(cardsAmount > 0)
+                {
+                    Debug.Log("Card removed from inventory");
+                    cardsAmount++;
+                    cardsAmountText.text = cardsAmount.ToString();
+                    success = true;
+                }
+                break;
+        }
+        return success;
     }
 }

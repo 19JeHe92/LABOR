@@ -5,5 +5,5 @@
     Medicine,
     Weapon,
     Bomb, 
-    Other
+    Card
 }
