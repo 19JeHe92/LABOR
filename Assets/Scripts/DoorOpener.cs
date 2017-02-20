@@ -4,11 +4,11 @@ using System.Collections;
 
 public class DoorOpener : MonoBehaviour {
 
-    public DoorButton button1;
-    public DoorButton button2;
-    public DoorButton button3;
-    public DoorButton button4;
-    public RobotContoller robot;
+    public NVRButton button1;
+    public NVRButton button2;
+    public NVRButton button3;
+    public NVRButton button4;
+   // public RobotContoller robot;
 
     public GameObject CardLight;
     public GameObject Combinationlight;
@@ -84,7 +84,7 @@ public class DoorOpener : MonoBehaviour {
         if (isCorrectCombinationEntered && isCardInserted)
         {
             StartCoroutine("Open");
-            robot.run = true; 
+           // robot.run = true; 
         }
     }
 

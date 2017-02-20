@@ -4,19 +4,19 @@ using NewtonVR;
   
 public class ColorGameController : MonoBehaviour {
 
-    public ColorGameStartButton StartButton;
+    public NVRButton StartButton;
 
-    public ColorGameButton BlueButton;
-    public ColorGameButton RedButton;
-    public ColorGameButton GreenButton;
-    public ColorGameButton VioletButton;
-    public ColorGameButton BrownButton;
-    public ColorGameButton OrangeButton;
+    public NVRButton Button1;
+    public NVRButton Button2;
+    public NVRButton Button3;
+    public NVRButton Button4;
+    public NVRButton Button5;
+    public NVRButton Button6;
 
     public LightController lightController;
     public float speed = 0.8f;
 
-    private ColorGameButton correctButton;
+    private NVRButton correctButton;
     private int roundNo = 0;
     
     private void Update()
@@ -25,28 +25,28 @@ public class ColorGameController : MonoBehaviour {
         {
             StartGame();
         }
-        if (BlueButton.ButtonDown)
+        if (Button1.ButtonDown)
         {
-            if(correctButton != BlueButton)
+            if(correctButton != Button1)
             {
                 lightController.StartCoroutine("BlinkRed");
             }else
             {
                 if (roundNo == 1)
                 {
-                    correctButton = GreenButton;
+                    correctButton = Button3;
                 }else if(roundNo == 2)
                 {
-                    correctButton = BrownButton;
+                    correctButton = Button5;
                 }else
                 {
                     lightController.StartCoroutine("ShowCorrectCombination");
                 }
             }
         }
-        if (RedButton.ButtonDown)
+        if (Button2.ButtonDown)
         {
-            if (correctButton != RedButton)
+            if (correctButton != Button2)
             {
                 lightController.StartCoroutine("BlinkRed");
             }else
@@ -55,44 +55,44 @@ public class ColorGameController : MonoBehaviour {
                 {
                     lightController.StartCoroutine("ShowSecondRoundColors");
                     roundNo = 2;
-                    correctButton = OrangeButton;
+                    correctButton = Button6;
                 }
                 else if(roundNo == 3)
                 {
-                    correctButton = BlueButton;
+                    correctButton = Button1;
                 }
             }
         }
-        if (GreenButton.ButtonDown)
+        if (Button3.ButtonDown)
         {
-            if (correctButton != GreenButton)
+            if (correctButton != Button3)
             {
                 lightController.StartCoroutine("BlinkRed");
             }
             else
             {
-                correctButton = RedButton;
+                correctButton = Button2;
             }
         }
-        if (VioletButton.ButtonDown)
+        if (Button4.ButtonDown)
         {
-            if (correctButton != VioletButton)
+            if (correctButton != Button4)
             {
                 lightController.StartCoroutine("BlinkRed");
             }
             else if(roundNo == 2)
             {
-                correctButton = BlueButton;
+                correctButton = Button1;
             }
             else if (roundNo == 3)
             {
-                correctButton = OrangeButton;
+                correctButton = Button6;
             }
 
         }
-        if (BrownButton.ButtonDown)
+        if (Button5.ButtonDown)
         {
-            if (correctButton != BrownButton)
+            if (correctButton != Button5)
             {
                 lightController.StartCoroutine("BlinkRed");
             }
@@ -100,22 +100,22 @@ public class ColorGameController : MonoBehaviour {
             {
                 lightController.StartCoroutine("ShowThirdRoundColors");
                 roundNo = 3;
-                correctButton = VioletButton;
+                correctButton = Button4;
             }
         }
-        if (OrangeButton.ButtonDown)
+        if (Button6.ButtonDown)
         {
-            if (correctButton != OrangeButton)
+            if (correctButton != Button6)
             {
                 lightController.StartCoroutine("BlinkRed");
             }
             else if (roundNo == 2)
             {
-                correctButton = VioletButton;
+                correctButton = Button4;
             }
             else
             {
-                correctButton = GreenButton;
+                correctButton = Button3;
             }
         }
     }
@@ -125,6 +125,6 @@ public class ColorGameController : MonoBehaviour {
         Debug.Log("Game Started");
         lightController.StartCoroutine("StartFirstRound");
         roundNo = 1;
-        correctButton = BlueButton;
+        correctButton = Button1;
     }
 }
