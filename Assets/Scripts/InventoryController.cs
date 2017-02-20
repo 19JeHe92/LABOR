@@ -74,6 +74,7 @@ public class InventoryController : MonoBehaviour
 
         if (closest != null)
         {
+            connectedHand.EndInteraction(closest);
             AddToInventory(closest);
             inventorySound.Play();
             return true;
@@ -139,7 +140,7 @@ public class InventoryController : MonoBehaviour
                 }
                 break;
             case InventoryObjectType.Injection:
-                if (knivesAmount > 0)
+                if (injectionsAmount > 0)
                 {
                     Debug.Log("Injection removed from inventory");
                     injectionsAmount--;

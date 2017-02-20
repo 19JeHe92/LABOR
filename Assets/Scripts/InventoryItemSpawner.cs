@@ -32,13 +32,13 @@ public class InventoryItemSpawner : MonoBehaviour
     {
         if (hand.Inputs[NVRButtons.Grip].PressDown)
         {
-            //if (inevtoryController.RemovefromInventory(typeToRemove))
-            //{
+            if (inevtoryController.RemovefromInventory(typeToRemove))
+            {
                 Debug.Log("Successfully removed item");
                 //Spawn an object and make the hand interact with it
                 GameObject spawnedObject = (GameObject)Instantiate(prefabToSpawn, transform.position, transform.rotation);
                 hand.BeginInteraction(spawnedObject.GetComponent<NVRInteractableItem>());
-            //}
+            }
         }
     }
 
