@@ -1,7 +1,9 @@
 ﻿using NewtonVR;
 using UnityEngine;
 
-[RequireComponent(typeof(NVRHand))]
+//We are not using RequireComponent because:
+//RequireComponent impies the error "Can't remove NVRHand Script because ... Script depends on it", which causes the game to crash
+//[RequireComponent(typeof(NVRHand))]
 public class StickController : MonoBehaviour {
 
     public bool isVisible = false;
