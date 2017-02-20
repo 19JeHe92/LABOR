@@ -4,11 +4,17 @@ using UnityEngine;
 
 public enum Checkpoints 
 {
-    StartRoom,
+    FirstRoom,
     Floor1,
-    Morgue,
-    Floor2,
-    Lift,
+    ZombieLab,
+    RoboFloor,
+    Smoke,
+    LightsPuzzle,
     Lasers,
-    Robots
+    RobotFactory,
+    Height,
+    ControlRoom,
+    Floor2,
+    GeneratorRoom,
+    Boss
 }

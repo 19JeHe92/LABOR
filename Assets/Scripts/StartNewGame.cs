@@ -6,6 +6,6 @@ public class StartNewGame : MonoBehaviour {
 
 	public void StartGame()
     {
-        mainController.LoadScene(Checkpoints.StartRoom);
+        mainController.LoadScene(Checkpoints.FirstRoom);
     }
 }
