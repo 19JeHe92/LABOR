@@ -19,11 +19,22 @@ public class DoorOpener : MonoBehaviour {
     public bool isCardInserted = false;
 
     public Transform End;
+    public AudioSource openedSound;
 
     private int nrOfCorrectButtons = 0;
     public float speed = 0.2f;
+    private bool soundPlayed = false;
     private void Update()
     {
+        if (isCardInserted && isCorrectCombinationEntered)
+        {
+            if (!soundPlayed)
+            {
+                openedSound.Play();
+                soundPlayed = true;
+            }
+            transform.position = Vector3.MoveTowards(transform.position, End.position, Time.deltaTime*speed);
+        }
         if (Card.IsAttached)
         {
             isCardInserted = true;
@@ -81,11 +92,6 @@ public class DoorOpener : MonoBehaviour {
                 nrOfCorrectButtons = 0;
             }
         }
-        if (isCorrectCombinationEntered && isCardInserted)
-        {
-            StartCoroutine("Open");
-           // robot.run = true; 
-        }
     }
 
     private IEnumerator BlinkRed()
@@ -96,20 +102,6 @@ public class DoorOpener : MonoBehaviour {
 
     }
 
-    private IEnumerator Open()
-    {
-        float timeSinceStarted = 0f;
-        while (true)
-        {
-            timeSinceStarted += Time.deltaTime/speed;
-           transform.position = Vector3.Lerp(transform.position, End.position, timeSinceStarted);
-
-            if (transform.position == End.position)
-            {
-                yield break;
-            }
-            yield return null;
-        }
-    }
+   
 }
             

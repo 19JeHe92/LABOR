@@ -7,19 +7,20 @@ public class CapsuleController : MonoBehaviour {
     public float speed = 0.2f;
     public bool opening = false;
     public Transform up;
+    public AudioSource openingSound;
 
+	void Awake () {
+        openingSound = GetComponent<AudioSource>();
+        StartCoroutine("Wait");
+	}
+	
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(secondsBeforeOpen);
         opening = true;
+        openingSound.Play();
     }
 
-	// Use this for initialization
-	void Awake () {
-        StartCoroutine("Wait");
-	}
-	
-	// Update is called once per frame
 	void Update () {
         if (opening)
         {

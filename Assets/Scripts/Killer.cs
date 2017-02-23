@@ -10,7 +10,7 @@ public class Killer : MonoBehaviour {
         if (target.GetComponent<RobotContoller>() != null)
         {
             //player dead
-            controller.GameOver();
+            controller.ReturnToMainMenu();
         }
     }
 }
