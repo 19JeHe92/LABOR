@@ -5,6 +5,8 @@ This is not the initial Repository of the project but it contains the final vers
 
 Dropbox Link to Assets: https://www.dropbox.com/sh/brtyqk2u29frsv7/AACecSc1SX8YTiAn7112r04ua?dl=0
 
+Dropbox Link to GameDesignDocument: https://www.dropbox.com/s/5m0sdeepc8lht9p/Design%20Document%20Template%20Short.docx?dl=0
+
 Link to TODO List: https://docs.google.com/spreadsheets/d/1ClqUu1o38k5drnNIm40pVnrPRv7mF1p-cI4s5VaH4_0/edit#gid=0
 
 Link to Dialogues: https://docs.google.com/document/d/1KRD_Y_1wNQ4PFurVXBVXyqTukePkrZ8EYXRHEoV8_h4/edit
