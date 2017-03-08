@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using NewtonVR;
+using NewtonVR.Example;
 using System;
 
 public class InventoryItemSpawner : MonoBehaviour
@@ -37,7 +38,11 @@ public class InventoryItemSpawner : MonoBehaviour
                 Debug.Log("Successfully removed item");
                 //Spawn an object and make the hand interact with it
                 GameObject spawnedObject = (GameObject)Instantiate(prefabToSpawn, transform.position, transform.rotation);
-                hand.BeginInteraction(spawnedObject.GetComponent<NVRInteractableItem>());
+                NVRInteractableItem item = spawnedObject.GetComponent<NVRInteractableItem>();
+                if (item != null)
+                    hand.BeginInteraction(item);
+                else
+                    hand.BeginInteraction(spawnedObject.GetComponent<NVRExampleGun>());
             }
         }
     }

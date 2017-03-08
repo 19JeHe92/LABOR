@@ -7,6 +7,14 @@ using UnityEngine.UI;
 //[RequireComponent(typeof(NVRHand))]
 public class InventoryController : MonoBehaviour
 {
+    public int initialKnivesAmount = 3;
+    public int initialInjectionsAmount = 3;
+    public int initialBombsAmount = 3;
+    public int initialMedicineAmount = 3;
+    public int initialWeaponsAmount = 3;
+    public int initialCardsAmount = 3;
+
+
     public NVRButtons PickUpButton = NVRButtons.Trigger;
     public NVRButtons ShowInventoryButton = NVRButtons.ApplicationMenu;
     public GameObject InventoryObject;
@@ -20,16 +28,38 @@ public class InventoryController : MonoBehaviour
     private NVRHand connectedHand;
     private AudioSource inventorySound;
     private int knivesAmount = 0;
-    private int medicineAmount = 0;
-    private int bombsAmount = 0;
-    private int cardsAmount = 0;
-    private int weaponsAmount = 0;
     private int injectionsAmount = 0;
+    private int bombsAmount = 0;
+    private int weaponsAmount = 0;
+    private int medicineAmount = 0;
+    private int cardsAmount = 0;
 
     void Awake()
     {
+        InitInventory();
         connectedHand = this.GetComponent<NVRHand>();
         inventorySound = GetComponent<AudioSource>();
+    }
+
+    private void InitInventory()
+    {
+        knivesAmount = initialKnivesAmount;
+        injectionsAmount = initialInjectionsAmount;
+        bombsAmount = initialBombsAmount;
+        weaponsAmount = initialWeaponsAmount;
+        medicineAmount = initialMedicineAmount;
+        cardsAmount = initialCardsAmount;
+        UpdateInventoryGUI();
+    }
+
+    private void UpdateInventoryGUI()
+    {
+        knivesAmountText.text = knivesAmount.ToString();
+        injectionsAmountText.text = injectionsAmount.ToString();
+        medicineAmountText.text = medicineAmount.ToString();
+        weaponsAmountText.text = weaponsAmount.ToString();
+        bombsAmountText.text = bombsAmount.ToString();
+        cardsAmountText.text = cardsAmount.ToString();
     }
 
     private void LateUpdate()
@@ -96,32 +126,32 @@ public class InventoryController : MonoBehaviour
             case InventoryObjectType.Knife :
                 Debug.Log("Knife added to inventory");
                 knivesAmount++;
-                knivesAmountText.text = knivesAmount.ToString();
+                UpdateInventoryGUI();
                 break;
             case InventoryObjectType.Injection:
                 Debug.Log("Injection added to inventory");
                 injectionsAmount++;
-                injectionsAmountText.text = injectionsAmount.ToString();
+                UpdateInventoryGUI();
                 break;
             case InventoryObjectType.Medicine:
                 Debug.Log("Medicine added to inventory");
                 medicineAmount++;
-                medicineAmountText.text = medicineAmount.ToString();
+                UpdateInventoryGUI();
                 break;
             case InventoryObjectType.Weapon:
                 Debug.Log("Weapon added to inventory");
                 weaponsAmount++;
-                weaponsAmountText.text = weaponsAmount.ToString();
+                UpdateInventoryGUI();
                 break;
             case InventoryObjectType.Bomb:
                 Debug.Log("Bomb added to inventory");
                 bombsAmount++;
-                bombsAmountText.text = bombsAmount.ToString();
+                UpdateInventoryGUI();
                 break;
             case InventoryObjectType.Card:
                 Debug.Log("Card added to inventory");
                 cardsAmount++;
-                cardsAmountText.text = cardsAmount.ToString();
+                UpdateInventoryGUI();
                 break;
         }
         item.gameObject.SetActive(false);
@@ -137,7 +167,7 @@ public class InventoryController : MonoBehaviour
                 {
                     Debug.Log("Knife removed from inventory");
                     knivesAmount--;
-                    knivesAmountText.text = knivesAmount.ToString();
+                    UpdateInventoryGUI();
                     success = true;
                 }
                 break;
@@ -146,7 +176,7 @@ public class InventoryController : MonoBehaviour
                 {
                     Debug.Log("Injection removed from inventory");
                     injectionsAmount--;
-                    injectionsAmountText.text = injectionsAmount.ToString();
+                    UpdateInventoryGUI();
                     success = true;
                 }
                 break;
@@ -155,7 +185,7 @@ public class InventoryController : MonoBehaviour
                 {
                     Debug.Log("Medicine removed from inventory");
                     medicineAmount--;
-                    medicineAmountText.text = medicineAmount.ToString();
+                    UpdateInventoryGUI();
                     success = true;
                 }
                 break;
@@ -164,7 +194,7 @@ public class InventoryController : MonoBehaviour
                 {
                     Debug.Log("Weapon removed from inventory");
                     weaponsAmount--;
-                    weaponsAmountText.text = weaponsAmount.ToString();
+                    UpdateInventoryGUI();
                     success = true;
                 }
                 break;
@@ -173,7 +203,7 @@ public class InventoryController : MonoBehaviour
                 {
                     Debug.Log("Bomb removed from inventory");
                     bombsAmount--;
-                    bombsAmountText.text = bombsAmount.ToString();
+                    UpdateInventoryGUI();
                     success = true;
                 }
                 break;
@@ -181,8 +211,8 @@ public class InventoryController : MonoBehaviour
                 if(cardsAmount > 0)
                 {
                     Debug.Log("Card removed from inventory");
-                    cardsAmount++;
-                    cardsAmountText.text = cardsAmount.ToString();
+                    cardsAmount--;
+                    UpdateInventoryGUI();
                     success = true;
                 }
                 break;
