@@ -12,7 +12,8 @@ public class ColorGameController : MonoBehaviour {
     public NVRButton Button4;
     public NVRButton Button5;
     public NVRButton Button6;
-
+    public bool isGameSolved = false;
+    public DoorButtonSoundManager hintManager;
     public LightController lightController;
     public float speed = 0.8f;
 

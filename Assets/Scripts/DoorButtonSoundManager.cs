@@ -15,12 +15,22 @@ public class DoorButtonSoundManager : MonoBehaviour {
     public NVRButton button8;
     public NVRButton button9;
 
+    public bool isCardFound = false;
+    public bool isCombinationFound = false;
+
+    public AudioSource findCardHint;
+    public AudioSource findCardAndCodeHint;
 
     public AudioSource buttonPressedSound;
 
 	void Update () {
         if (button1.ButtonDown || button2.ButtonDown || button3.ButtonDown || button4.ButtonDown || button5.ButtonDown || button6.ButtonDown || button7.ButtonDown || button8.ButtonDown || button9.ButtonDown)
+        { 
             buttonPressedSound.Play();
-
+            if (!isCombinationFound)
+                findCardAndCodeHint.Play();
+            else if (!isCardFound)
+                findCardHint.Play();
+        }
     }
 }
