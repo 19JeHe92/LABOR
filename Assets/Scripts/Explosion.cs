@@ -10,14 +10,28 @@ public class Explosion : MonoBehaviour {
     public float maxLifeTime = 5f;
     public float explosionRadius = 5f;
     public GameObject explosion;
-	
-	void Start () {
-        Destroy(gameObject, maxLifeTime);	
-	}
-	
-    private void OnTriggerEnter(Collider other)
+    public float secondsBeforeExplode = 3f;
+
+    private float timeCounter = 0.0f;
+
+    void Start()
     {
-        if (other.gameObject.GetComponent<NVRHand>() == null) {
+        Destroy(gameObject, maxLifeTime);
+    }
+
+    private float CalculateDamage(Vector3 targetPosition)
+    {
+        Vector3 distance = targetPosition - transform.position;
+        float explosionDistance = distance.magnitude;
+        float relativeDistance = (explosionRadius - explosionDistance) / explosionRadius;
+
+        return Mathf.Max(0f, relativeDistance * maxDamage);
+    }
+
+	void Update () {
+        timeCounter += Time.deltaTime;
+        if(timeCounter > secondsBeforeExplode)
+        {
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
             for (int i = 0; i < colliders.Length; i++)
@@ -48,17 +62,4 @@ public class Explosion : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
-    private float CalculateDamage(Vector3 targetPosition)
-    {
-        Vector3 distance = targetPosition - transform.position;
-        float explosionDistance = distance.magnitude;
-        float relativeDistance = (explosionRadius - explosionDistance) / explosionRadius;
-
-        return Mathf.Max(0f, relativeDistance * maxDamage);
-    }
-
-	void Update () {
-		
-	}
 }
