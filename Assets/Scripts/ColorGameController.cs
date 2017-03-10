@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using NewtonVR;
-
   
 public class ColorGameController : MonoBehaviour {
 
@@ -12,6 +11,7 @@ public class ColorGameController : MonoBehaviour {
     public NVRButton Button4;
     public NVRButton Button5;
     public NVRButton Button6;
+
     public bool isGameSolved = false;
     public DoorButtonSoundManager hintManager;
     public LightController lightController;
@@ -19,19 +19,22 @@ public class ColorGameController : MonoBehaviour {
 
     private NVRButton correctButton;
     private int roundNo = 0;
+    private bool isGameStarted = false;
     
     private void Update()
     {
-        if (StartButton.ButtonDown)
+        if (StartButton.ButtonDown && !isGameStarted)
         {
             StartGame();
+            isGameStarted = true;
         }
         if (Button1.ButtonDown)
         {
             if(correctButton != Button1)
             {
-                lightController.StartCoroutine("BlinkRed");
-            }else
+                failed();
+            }
+            else
             {
                 if (roundNo == 1)
                 {
@@ -68,7 +71,7 @@ public class ColorGameController : MonoBehaviour {
         {
             if (correctButton != Button3)
             {
-                lightController.StartCoroutine("BlinkRed");
+                failed();
             }
             else
             {
@@ -79,7 +82,7 @@ public class ColorGameController : MonoBehaviour {
         {
             if (correctButton != Button4)
             {
-                lightController.StartCoroutine("BlinkRed");
+                failed();
             }
             else if(roundNo == 2)
             {
@@ -95,7 +98,7 @@ public class ColorGameController : MonoBehaviour {
         {
             if (correctButton != Button5)
             {
-                lightController.StartCoroutine("BlinkRed");
+                failed();
             }
             else 
             {
@@ -108,7 +111,7 @@ public class ColorGameController : MonoBehaviour {
         {
             if (correctButton != Button6)
             {
-                lightController.StartCoroutine("BlinkRed");
+                failed();
             }
             else if (roundNo == 2)
             {
@@ -127,5 +130,11 @@ public class ColorGameController : MonoBehaviour {
         lightController.StartCoroutine("StartFirstRound");
         roundNo = 1;
         correctButton = Button1;
+    }
+
+    private void failed()
+    {
+        lightController.StartCoroutine("BlinkRed");
+        isGameStarted = false;
     }
 }
