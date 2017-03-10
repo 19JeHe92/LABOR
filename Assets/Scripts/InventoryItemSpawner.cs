@@ -38,9 +38,13 @@ public class InventoryItemSpawner : MonoBehaviour
                 Debug.Log("Successfully removed item");
                 //Spawn an object and make the hand interact with it
                 GameObject spawnedObject = (GameObject)Instantiate(prefabToSpawn, transform.position, transform.rotation);
-                NVRInteractableItem item = spawnedObject.GetComponent<NVRInteractableItem>();
+                PickableItem item = spawnedObject.GetComponent<PickableItem>();
                 if (item != null)
+                {
                     hand.BeginInteraction(item);
+                    //Todo
+                    item.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
+                }
                 else
                     hand.BeginInteraction(spawnedObject.GetComponent<NVRExampleGun>());
             }
