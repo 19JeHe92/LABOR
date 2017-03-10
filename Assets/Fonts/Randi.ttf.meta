@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8f0e0b621e2211a43afcc753c9d182ae
+timeCreated: 1489155692
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Randi
+  fontNames:
+  - Randi
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
