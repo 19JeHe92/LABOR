@@ -1,9 +1,15 @@
 ﻿using UnityEngine;
 using NewtonVR;
-  
-public class ColorGameController : MonoBehaviour {
+
+public class ColorGameController : MonoBehaviour
+{
+
+    public SimonButtons[] round1Sol;
+    public SimonButtons[] round2Sol;
+    public SimonButtons[] round3Sol;
 
     public NVRButton StartButton;
+    public float pressBias = 2f;
 
     public NVRButton Button1;
     public NVRButton Button2;
@@ -12,114 +18,65 @@ public class ColorGameController : MonoBehaviour {
     public NVRButton Button5;
     public NVRButton Button6;
 
-    public bool isGameSolved = false;
     public DoorButtonSoundManager hintManager;
     public LightController lightController;
     public float speed = 0.8f;
+    private float counter = 0f;
 
     private NVRButton correctButton;
     private int roundNo = 0;
+    public bool isGameSolved = false;
     private bool isGameStarted = false;
-    
+    private bool isCounting = false;
+    private bool areButtonsDisabled = false;
+    private SimonButtons[] currentSol;
+    private int currentIndex = 0;
+
     private void Update()
     {
+        if (isCounting)
+        {
+            counter += Time.deltaTime;
+            if (counter > pressBias)
+            {
+                counter = 0f;
+                isCounting = false;
+                areButtonsDisabled = false;
+            }
+        }
+
         if (StartButton.ButtonDown && !isGameStarted)
         {
             StartGame();
             isGameStarted = true;
+            DisableButtons();
         }
-        if (Button1.ButtonDown)
+        if (isGameStarted && !areButtonsDisabled)
         {
-            if(correctButton != Button1)
+            if (Button1.ButtonDown)
             {
-                failed();
+                CheckInput(SimonButtons.first);
             }
-            else
+            if (Button2.ButtonDown)
             {
-                if (roundNo == 1)
-                {
-                    correctButton = Button3;
-                }else if(roundNo == 2)
-                {
-                    correctButton = Button5;
-                }else
-                {
-                    lightController.StartCoroutine("ShowCorrectCombination");
-                }
+                CheckInput(SimonButtons.second);
             }
-        }
-        if (Button2.ButtonDown)
-        {
-            if (correctButton != Button2)
+            if (Button3.ButtonDown)
             {
-                lightController.StartCoroutine("BlinkRed");
-            }else
-            {
-                if (roundNo == 1)
-                {
-                    lightController.StartCoroutine("ShowSecondRoundColors");
-                    roundNo = 2;
-                    correctButton = Button6;
-                }
-                else if(roundNo == 3)
-                {
-                    correctButton = Button1;
-                }
+                CheckInput(SimonButtons.third);
             }
-        }
-        if (Button3.ButtonDown)
-        {
-            if (correctButton != Button3)
+            if (Button4.ButtonDown)
             {
-                failed();
-            }
-            else
-            {
-                correctButton = Button2;
-            }
-        }
-        if (Button4.ButtonDown)
-        {
-            if (correctButton != Button4)
-            {
-                failed();
-            }
-            else if(roundNo == 2)
-            {
-                correctButton = Button1;
-            }
-            else if (roundNo == 3)
-            {
-                correctButton = Button6;
-            }
+                CheckInput(SimonButtons.forth);
 
-        }
-        if (Button5.ButtonDown)
-        {
-            if (correctButton != Button5)
-            {
-                failed();
             }
-            else 
+            if (Button5.ButtonDown)
             {
-                lightController.StartCoroutine("ShowThirdRoundColors");
-                roundNo = 3;
-                correctButton = Button4;
+                CheckInput(SimonButtons.fifth);
             }
-        }
-        if (Button6.ButtonDown)
-        {
-            if (correctButton != Button6)
+            if (Button6.ButtonDown)
             {
-                failed();
-            }
-            else if (roundNo == 2)
-            {
-                correctButton = Button4;
-            }
-            else
-            {
-                correctButton = Button3;
+                CheckInput(SimonButtons.sixth);
             }
         }
     }
@@ -129,12 +86,66 @@ public class ColorGameController : MonoBehaviour {
         Debug.Log("Game Started");
         lightController.StartCoroutine("StartFirstRound");
         roundNo = 1;
-        correctButton = Button1;
+        currentSol = round1Sol;
     }
 
     private void failed()
     {
         lightController.StartCoroutine("BlinkRed");
         isGameStarted = false;
+        currentIndex = 0;
+    }
+
+    private void DisableButtons()
+    {
+        isCounting = true;
+        areButtonsDisabled = true;
+    }
+
+    private void CheckInput(SimonButtons correct)
+    {
+        DisableButtons();
+        if (currentSol[currentIndex] != correct)
+        {
+            failed();
+        }
+        else
+        {
+            if (currentIndex < currentSol.Length - 1)
+                currentIndex++;
+            else
+            {
+                SolvedRound();
+                currentIndex = 0;
+            }
+        }
+    }
+
+    private void SolvedRound()
+    {
+        if (currentSol == round1Sol)
+        {
+            lightController.StartCoroutine("ShowSecondRoundColors");
+            currentSol = round2Sol;
+        }
+        else if (currentSol == round2Sol)
+        {
+            lightController.StartCoroutine("ShowThirdRoundColors");
+            currentSol = round3Sol;
+        }
+        else
+            Won();
+    }
+
+    private void Won()
+    {
+        hintManager.isCombinationFound = true;
+        lightController.StartCoroutine("ShowCorrectCombination");
+        isGameSolved = true;
+    }
+
+    public enum SimonButtons
+    {
+        first, second, third, forth, fifth, sixth
     }
 }
