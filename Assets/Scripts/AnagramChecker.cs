@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using NewtonVR;
 using System;
+using NewtonVR;
 
 public class AnagramChecker : MonoBehaviour {
 
@@ -21,29 +21,79 @@ public class AnagramChecker : MonoBehaviour {
     public ZombieCapsuleController capsule4;
 
     public DisplayManager display;
+    public RoboFloorLoader floorLoader;
+
+    public AudioSource wrongAudio;
+    public AudioSource correctAudio;
+
+    private NVRButton button;
+
+    void Awake()
+    {
+        button = GetComponent<NVRButton>();
+    }
+
+    void Update()
+    {
+        if (capsule1.isReleased)
+        {
+            sol1Light.active = true;
+        }
+        if (capsule2.isReleased)
+        {
+            sol2Light.active = true;
+        }
+        if (capsule3.isReleased)
+        {
+            sol3Light.active = true;
+        }
+        if (capsule4.isReleased)
+        {
+            sol4Light.active = true;
+        }
+        if (button.ButtonDown)
+            CheckInput();
+    }
 
 	public void CheckInput()
     {
         string input = GetInput();
-        if (input.Equals(solution1, StringComparison.InvariantCultureIgnoreCase))
+        Debug.Log("Anagram Input: "+input +" "+ string.Compare(solution1, input, true));
+        if (string.Compare(solution1, input, true)==0 && !sol1Light.active)
         {
+            Debug.Log("Anagram 1 solved");
             sol1Light.active = true;
             capsule1.DisableZombie();
+            correctAudio.Play();
         }
-        else if(input.Equals(solution2, StringComparison.InvariantCultureIgnoreCase))
+        else if(string.Compare(solution2, input, true) == 0 && !sol2Light.active)
         {
+            Debug.Log("Anagram 2 solved");
             sol2Light.active = true;
             capsule2.DisableZombie();
+            correctAudio.Play();
         }
-        else if (input.Equals(solution3, StringComparison.InvariantCultureIgnoreCase))
+        else if (string.Compare(solution3, input, true) == 0 && !sol3Light.active)
         {
+            Debug.Log("Anagram 3 solved");
             sol3Light.active = true;
             capsule3.DisableZombie();
+            correctAudio.Play();
         }
-        else if (input.Equals(solution4, StringComparison.InvariantCultureIgnoreCase))
+        else if (string.Compare(solution4, input, true) == 0 && !sol4Light.active)
         {
+            Debug.Log("Anagram 4 solved");
             sol4Light.active = true;
             capsule4.DisableZombie();
+            correctAudio.Play();
+        }
+        else
+        {
+            wrongAudio.Play();
+        }
+        if (sol1Light.active && sol2Light.active && sol3Light.active && sol4Light.active)
+        {
+            floorLoader.areAnagramsSolved = true;
         }
     }
 

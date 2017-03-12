@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class RoboFloorLoader : MonoBehaviour {
 
+    public bool isWeaponFound = false;
+    public bool areAnagramsSolved = false;
+    public AudioSource HintSound;
+
     private NVRButton button;
 
 	void Awake()
@@ -14,8 +18,15 @@ public class RoboFloorLoader : MonoBehaviour {
 	void Update () {
         if (button.ButtonIsPushed)
         {
-            Debug.Log("Goodbye blue sky");
-            SceneManager.LoadScene("ChP3-RoboFloor");
+            if (isWeaponFound && areAnagramsSolved)
+            {
+                Debug.Log("Goodbye blue sky");
+                SceneManager.LoadScene("ChP3-RoboFloor");
+            }
+            else if(!HintSound.isPlaying && !isWeaponFound)
+            {
+                HintSound.Play();
+            }
         }
 	}
 }

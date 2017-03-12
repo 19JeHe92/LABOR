@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ZombieCapsuleController : MonoBehaviour
 {
 
     public float secondsBeforeRelease = 15f;
     public GameObject Zombie;
+    public bool isReleased = false;
 
     private float counter = 0.0f;
 
@@ -24,6 +23,7 @@ public class ZombieCapsuleController : MonoBehaviour
 
     private void ReleaseZombie()
     {
+        isReleased = true;
         //TODO
     }
 
