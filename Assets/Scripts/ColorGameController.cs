@@ -18,6 +18,12 @@ public class ColorGameController : MonoBehaviour
     public NVRButton Button5;
     public NVRButton Button6;
 
+    public AudioSource startSound;
+    public AudioSource correctSound;
+    public AudioSource failSound;
+    public AudioSource wonSound;
+    public AudioSource buttonSound;
+
     public DoorButtonSoundManager hintManager;
     public LightController lightController;
     public float speed = 0.8f;
@@ -83,6 +89,7 @@ public class ColorGameController : MonoBehaviour
 
     private void StartGame()
     {
+        startSound.Play();
         Debug.Log("Game Started");
         lightController.StartCoroutine("StartFirstRound");
         roundNo = 1;
@@ -91,6 +98,7 @@ public class ColorGameController : MonoBehaviour
 
     private void failed()
     {
+        failSound.Play();
         lightController.StartCoroutine("BlinkRed");
         isGameStarted = false;
         currentIndex = 0;
@@ -104,6 +112,7 @@ public class ColorGameController : MonoBehaviour
 
     private void CheckInput(SimonButtons correct)
     {
+        buttonSound.Play();
         DisableButtons();
         if (currentSol[currentIndex] != correct)
         {
@@ -123,6 +132,7 @@ public class ColorGameController : MonoBehaviour
 
     private void SolvedRound()
     {
+        correctSound.Play();
         if (currentSol == round1Sol)
         {
             lightController.StartCoroutine("ShowSecondRoundColors");
@@ -139,6 +149,7 @@ public class ColorGameController : MonoBehaviour
 
     private void Won()
     {
+        wonSound.Play();
         hintManager.isCombinationFound = true;
         lightController.StartCoroutine("ShowCorrectCombination");
         isGameSolved = true;

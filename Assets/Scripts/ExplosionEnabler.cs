@@ -4,7 +4,8 @@ public class ExplosionEnabler : MonoBehaviour {
 
     public AudioSource explosionSound;
     public GameObject explosionPrefab;
-    public float secondsBeforeExplosionAdded = 3.0f;
+    public float secondsBeforeExplosionAdded = 1.0f;
+    public HealthBarController playerHealth;
 
     private bool explosionAdded  = false;
     private bool counterStarted = false;
@@ -29,6 +30,7 @@ public class ExplosionEnabler : MonoBehaviour {
         if (counter > secondsBeforeExplosionAdded && !explosionAdded)
         {
             Explosion explosion = pickable.gameObject.AddComponent<Explosion>();
+            explosion.playerHealth = playerHealth;
             explosion.explosionSound = explosionSound;
             explosion.explosion = explosionPrefab;
             explosionAdded = true;

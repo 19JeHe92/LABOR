@@ -38,11 +38,23 @@ public class InventoryItemSpawner : MonoBehaviour
                 Debug.Log("Successfully removed item");
                 //Spawn an object and make the hand interact with it
                 GameObject spawnedObject = (GameObject)Instantiate(prefabToSpawn, transform.position, transform.rotation);
+                ExplosionEnabler rocket = prefabToSpawn.GetComponent<ExplosionEnabler>();
+                if (rocket)
+                {
+                    rocket.playerHealth = GameObject.Find("LeftHand").GetComponent<HealthBarController>();
+                }
+                Medicine med = prefabToSpawn.GetComponent<Medicine>();
+                if (med)
+                {
+                    Debug.Log("Spawned Medicine in hand");
+                    med.health = GameObject.Find("LeftHand").GetComponent<HealthBarController>();
+                    med.head = GameObject.Find("Head").GetComponent<NVRHead>();
+                }
                 PickableItem item = spawnedObject.GetComponent<PickableItem>();
                 if (item != null)
                 {
                     hand.BeginInteraction(item);
-                    //Todo
+                    //TODO: Remove velocity
                     item.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0.0f, 0.0f, 0.0f);
                 }
                 else

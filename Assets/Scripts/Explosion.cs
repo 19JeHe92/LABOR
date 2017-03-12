@@ -11,6 +11,7 @@ public class Explosion : MonoBehaviour {
     public float explosionRadius = 5f;
     public GameObject explosion;
     public float secondsBeforeExplode = 3f;
+    public HealthBarController playerHealth;
 
     private float timeCounter = 0.0f;
 
@@ -32,6 +33,7 @@ public class Explosion : MonoBehaviour {
         timeCounter += Time.deltaTime;
         if(timeCounter > secondsBeforeExplode)
         {
+            playerHealth.decreaseHealth(Convert.ToInt32(CalculateDamage(playerHealth.transform.position)));
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
             for (int i = 0; i < colliders.Length; i++)
@@ -46,12 +48,7 @@ public class Explosion : MonoBehaviour {
                 EnemyHealth enemyHealth = targetRigidbody.GetComponent<EnemyHealth>();
                 if (!enemyHealth)
                 {
-                    HealthBarController playerHealth = targetRigidbody.GetComponent<HealthBarController>();
-                    if (!playerHealth)
-                    {
-                        continue;
-                    }
-                    playerHealth.decreaseHealth(Convert.ToInt32(CalculateDamage(targetRigidbody.position)));
+                    continue;
                 }
                 enemyHealth.decreaseHealth(Convert.ToInt32(CalculateDamage(targetRigidbody.position)));
             }

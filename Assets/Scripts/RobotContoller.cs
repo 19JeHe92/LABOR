@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 public class RobotContoller : MonoBehaviour {
 
     public NVRHead playerHead;
-    public bool run = false;
+    public bool run = true;
     public float RunSpeed = 5.0f;
     private Animator anim;
+    public Transform target;
 
     private bool ft = true;
 
@@ -35,10 +36,13 @@ public class RobotContoller : MonoBehaviour {
                 transform.Rotate(new Vector3(0,0, 180));
                 ft = false;
             }
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerHead.transform.position.x, 0, playerHead.transform.position.z), RunSpeed * Time.deltaTime);
+            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerHead.transform.position.x, 0, playerHead.transform.position.z), RunSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(target.transform.position.x, 0, target.transform.position.z), RunSpeed * Time.deltaTime);
         }
-        if(transform.position == playerHead.transform.position)
-            SceneManager.LoadScene("StartScene");
+        //if(transform.position == playerHead.transform.position)
+        if (transform.position == target.transform.position)
+            Debug.Log("transform.position == target.transform.position");
+        //SceneManager.LoadScene("StartScene");
     }
 
 	void OnTriggerEnter(Collider target)
