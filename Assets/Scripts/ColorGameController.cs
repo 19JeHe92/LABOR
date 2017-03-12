@@ -112,20 +112,24 @@ public class ColorGameController : MonoBehaviour
 
     private void CheckInput(SimonButtons correct)
     {
-        buttonSound.Play();
-        DisableButtons();
-        if (currentSol[currentIndex] != correct)
+        if (!isGameSolved)
         {
-            failed();
-        }
-        else
-        {
-            if (currentIndex < currentSol.Length - 1)
-                currentIndex++;
+
+            buttonSound.Play();
+            DisableButtons();
+            if (currentSol[currentIndex] != correct)
+            {
+                failed();
+            }
             else
             {
-                SolvedRound();
-                currentIndex = 0;
+                if (currentIndex < currentSol.Length - 1)
+                    currentIndex++;
+                else
+                {
+                    SolvedRound();
+                    currentIndex = 0;
+                }
             }
         }
     }

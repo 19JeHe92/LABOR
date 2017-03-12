@@ -15,6 +15,8 @@ public class LightController : MonoBehaviour {
     public Color Button5Color;
     public Color Button6Color;
 
+    public AudioSource lightSound;
+
     public float glowingSpeed = 0.2f;
 
     public IEnumerator StartFirstRound()
@@ -49,16 +51,25 @@ public class LightController : MonoBehaviour {
     private IEnumerator ShowFirstRoundColors()
     {
         yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light1.GetComponent<Renderer>().material.color = Button1Color ;
+
         yield return new WaitForSeconds(1);
         Light1.GetComponent<Renderer>().material.color = Color.white;
+
         yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light2.GetComponent<Renderer>().material.color = Button3Color ;
+
         yield return new WaitForSeconds(1);
         Light2.GetComponent<Renderer>().material.color = Color.white;
+
         yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light3.GetComponent<Renderer>().material.color = Button2Color ;
+
         yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light3.GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(1);
     }
@@ -147,22 +158,28 @@ public class LightController : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light2.GetComponent<Renderer>().material.color = Button6Color;//orange
+
         yield return new WaitForSeconds(1);
         Light2.GetComponent<Renderer>().material.color = Color.white;
-        yield return new WaitForSeconds(1);
 
-     
+        yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light4.GetComponent<Renderer>().material.color = Button4Color;//violet
+
         yield return new WaitForSeconds(1);
         Light4.GetComponent<Renderer>().material.color = Color.white;
-        yield return new WaitForSeconds(1);
 
+        yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light2.GetComponent<Renderer>().material.color = Button1Color;//blue
+
         yield return new WaitForSeconds(1);
         Light2.GetComponent<Renderer>().material.color = Color.white;
-        yield return new WaitForSeconds(1);
 
+        yield return new WaitForSeconds(1);
+        lightSound.Play();
         Light3.GetComponent<Renderer>().material.color = Button5Color;//brown
         yield return new WaitForSeconds(1);
         Light3.GetComponent<Renderer>().material.color = Color.white;
@@ -197,26 +214,35 @@ public class LightController : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(1);
+
+        lightSound.Play();
         Light1.GetComponent<Renderer>().material.color = Button4Color;//violet
         yield return new WaitForSeconds(1);
         Light1.GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(1);
 
+        lightSound.Play();
 
         Light2.GetComponent<Renderer>().material.color = Button6Color;//orange
         yield return new WaitForSeconds(1);
         Light2.GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(1);
 
+        lightSound.Play();
+
         Light3.GetComponent<Renderer>().material.color = Button3Color;//green
         yield return new WaitForSeconds(1);
         Light3.GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(1);
 
+        lightSound.Play();
+
         Light4.GetComponent<Renderer>().material.color = Button2Color;//red
         yield return new WaitForSeconds(1);
         Light4.GetComponent<Renderer>().material.color = Color.white;
         yield return new WaitForSeconds(1);
+
+        lightSound.Play();
 
         Light1.GetComponent<Renderer>().material.color = Button1Color;//blue
         yield return new WaitForSeconds(1);
