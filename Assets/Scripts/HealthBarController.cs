@@ -31,19 +31,19 @@ public class HealthBarController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (Hand.Inputs[showHealthButton].IsPressed == true)
-        {
-            if (!HealthBar.active)
-            {
-                //Debug.Log("Show health!");
-                HealthBar.SetActive(true);
-            }
-        }
-        else if (HealthBar.active)
-        {
-            // Debug.Log("Hide Health!");
-            HealthBar.SetActive(false);
-        }
+        //if (Hand.Inputs[showHealthButton].IsPressed == true)
+        //{
+        //    if (!HealthBar.active)
+        //    {
+        //        //Debug.Log("Show health!");
+        //        HealthBar.SetActive(true);
+        //    }
+        //}
+        //else if (HealthBar.active)
+        //{
+        //    // Debug.Log("Hide Health!");
+        //    HealthBar.SetActive(false);
+        //}
 
     }
 
@@ -92,7 +92,7 @@ public class HealthBarController : MonoBehaviour
             greenPart.transform.localScale = new Vector3(greenPart.transform.localScale.x, health * initialScale.y / 100, greenPart.transform.localScale.z);
             float positionSynch;
             if (decreasing)
-                positionSynch = -(prevScale.y - greenPart.transform.localScale.y) /2;
+                positionSynch = -(prevScale.y - greenPart.transform.localScale.y) / 2;
             else
                 positionSynch = (greenPart.transform.localScale.y - prevScale.y) / 2;
             greenPart.transform.localPosition += new Vector3(0, positionSynch, 0);

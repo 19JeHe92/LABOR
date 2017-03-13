@@ -8,8 +8,8 @@ public class DoorOpener : MonoBehaviour {
     public NVRButton button2;
     public NVRButton button3;
     public NVRButton button4;
-   // public RobotContoller robot;
 
+    public GameObject TeleporterBlockingObject;
     public GameObject CardLight;
     public GameObject Combinationlight;
 
@@ -30,6 +30,7 @@ public class DoorOpener : MonoBehaviour {
         {
             if (!soundPlayed)
             {
+                TeleporterBlockingObject.active = false;
                 openedSound.Play();
                 soundPlayed = true;
             }
