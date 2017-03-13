@@ -12,6 +12,10 @@ public class EnemyHealth : MonoBehaviour
         {
             enemy = GetComponent<Robot>();
         }
+        if (type == EnemyType.Zombie)
+        {
+            enemy = GetComponent<Zombie>();
+        }
     }
 
     void Update()

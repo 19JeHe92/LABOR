@@ -3,23 +3,32 @@ using NewtonVR;
 
 public class ZombieLabHintPlayer : MonoBehaviour {
 
+    //InfectedSound
     public AudioSource infectedSound;
     public float SecondsBeforeInfectedSound = 3;
 
+    //InjectionHintSound
     public AudioSource InjectionHintSound;
     public float SecondsBeforeInjectionHint = 5;
 
+    //Disable generator hint
+    public GameObject freeZombie;
+    public AudioSource disableGeneratorSound;
+
+    //Anagrams hint
     public AudioSource anagramHint;
     public Transform generator;
     public NVRHead head;
     public float distanceToAnagrams = 3;
 
+
     private float counter;
     private bool wasInfectedSoundPlayed = false;
     private bool wasInjectionHintPlayed = false;
     private bool wasAnagramHintPlayed = false;
-	
-	void Update () {
+    private bool wasdisableGeneratorSoundPlayed = false;
+
+    void Update () {
         counter += Time.deltaTime;
 
         if (counter > SecondsBeforeInfectedSound && !wasInfectedSoundPlayed)
@@ -38,6 +47,13 @@ public class ZombieLabHintPlayer : MonoBehaviour {
         {
             anagramHint.Play();
             wasAnagramHintPlayed = true;
+        }
+
+        if(freeZombie == null && !wasdisableGeneratorSoundPlayed)
+        {
+            Debug.Log("Playing Generator Sound");
+            disableGeneratorSound.Play();
+            wasdisableGeneratorSoundPlayed = true;
         }
 	}
 
