@@ -25,8 +25,11 @@ public class AnagramChecker : MonoBehaviour {
 
     public AudioSource wrongAudio;
     public AudioSource correctAudio;
+    public AudioSource comeonAudio;
+    public float secondsBetweenCmon = 60f;
 
     private NVRButton button;
+    private float counter = 0;
 
     void Awake()
     {
@@ -35,6 +38,16 @@ public class AnagramChecker : MonoBehaviour {
 
     void Update()
     {
+        if (!sol1Light.active || !sol2Light.active || !sol3Light.active || !sol4Light.active)
+        {
+            counter += Time.deltaTime;
+            if (counter > secondsBetweenCmon)
+            {
+                comeonAudio.Play();
+                counter = 0;
+            }
+        }
+
         if (capsule1.isReleased)
         {
             sol1Light.active = true;

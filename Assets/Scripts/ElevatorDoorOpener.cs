@@ -1,18 +1,19 @@
 ﻿using UnityEngine;
+using NewtonVR;
 
 public class ElevatorDoorOpener : MonoBehaviour
 {
-
+    public NVRButton openButton;
     public GameObject leftDoor;
     public GameObject rightDoor;
     public Transform leftEnd;
     public Transform rightEnd;
     public float openingSpeed;
-    public bool isOpen = false;
+    public bool isEnabled = false;
 
     void Update()
     {
-        if (isOpen)
+        if (isEnabled && openButton.ButtonWasPushed)
         {
             float step = openingSpeed * Time.deltaTime;
             leftDoor.transform.position = Vector3.MoveTowards(leftDoor.transform.position, leftEnd.position, step);

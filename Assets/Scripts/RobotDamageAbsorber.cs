@@ -2,8 +2,10 @@
 
 public class RobotDamageAbsorber : MonoBehaviour {
 
-    private EnemyHealth health;
     public int knifeDamage = 60;
+    public AudioSource hitSound;
+
+    private EnemyHealth health;
 
     void Awake()
     {
@@ -18,6 +20,7 @@ public class RobotDamageAbsorber : MonoBehaviour {
             if(item.objectType == InventoryObjectType.Knife)
             {
                 health.decreaseHealth(knifeDamage);
+                hitSound.Play();
                 Debug.Log("Decreased Robots Health by "+knifeDamage);
             }
         }
