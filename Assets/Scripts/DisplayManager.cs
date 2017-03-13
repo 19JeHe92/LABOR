@@ -33,6 +33,14 @@ public class DisplayManager : MonoBehaviour
         }
     }
 
+    public void ClearDisplay()
+    {
+        foreach (Text txt in chars)
+        {
+            txt.text = "";
+        }
+    }
+
     public enum Characters
     {
         Q, W, E, R, T, Z, U, I, O, P, A, S, D, F, G, H, J, K, L, Y, X, C, V, B, N, M

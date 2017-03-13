@@ -108,6 +108,7 @@ public class AnagramChecker : MonoBehaviour {
         {
             floorLoader.areAnagramsSolved = true;
         }
+        display.ClearDisplay();
     }
 
     private string GetInput()
