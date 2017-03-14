@@ -14,16 +14,14 @@ public class HealthBarController : MonoBehaviour
     private Vector3 currentScale;
     private Vector3 prevScale;
 
-    public bool isVisible = false;
-    public NVRButtons showHealthButton = NVRButtons.ApplicationMenu;
-    public GameObject HealthBar;
+    //public NVRButtons showHealthButton = NVRButtons.ApplicationMenu;
+    //public GameObject HealthBar;
 
     private int currentHealth = 100;
-    private NVRHand Hand;
+    public NVRHand Hand;
 
-    private void Awake()
+    void Awake()
     {
-        Hand = this.GetComponent<NVRHand>();
         initialScale = greenPart.transform.localScale;
         currentScale = initialScale;
         prevScale = initialScale;
@@ -45,6 +43,15 @@ public class HealthBarController : MonoBehaviour
         //    HealthBar.SetActive(false);
         //}
 
+    }
+
+    void Update()
+    {
+        //Vector3 newPosition = new Vector3(Hand.transform.position.x, Hand.transform.position.y + 0.04f, Hand.transform.position.z);
+        //transform.position = newPosition;
+        transform.rotation = Hand.transform.rotation;
+        transform.Rotate(90, 0, 0);
+        transform.position = Hand.transform.position + (Hand.transform.up * 0.01f) - (Hand.transform.forward * 0.03f);
     }
 
     public void increaseHealth(int amount)
