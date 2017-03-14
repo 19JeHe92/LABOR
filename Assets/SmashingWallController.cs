@@ -1,16 +1,52 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using NewtonVR;
 
-public class SmashingWallController : MonoBehaviour {
+public class SmashingWallController : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public float speed = 2f;
+    public GameObject box;
+    public bool isDeactivated = false;
+    public Transform endPosLeft;
+    public Transform endPosRight;
+    public AudioSource smashSound;
+   // public NVRHead playerHead;
+    //public HealthBarController health;
+
+    private bool moveToEndPos = true;
+
+    void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Trigger");
+        smashSound.Play();
+        if (other.tag.Equals("Box"))
+        {
+            isDeactivated = true;
+        }
+        //else if (other == playerHead)
+        //{
+        //   // health.decreaseHealth(110);
+        //}
+        else moveToEndPos = true;
+    }
+
+    void Update()
+    {
+        if (!isDeactivated)
+        {
+            //PingPong
+            if (moveToEndPos)
+                transform.position = Vector3.MoveTowards(transform.position, endPosLeft.position, speed * Time.deltaTime);
+            else
+                transform.position = Vector3.MoveTowards(transform.position, endPosRight.position, speed * Time.deltaTime);
+            if (transform.position == endPosLeft.position)
+                moveToEndPos = false;
+
+        }
+        else
+        {
+            //Deactivated
+            transform.position = Vector3.MoveTowards(transform.position, endPosLeft.position, speed * Time.deltaTime);
+        }
+    }
 }
