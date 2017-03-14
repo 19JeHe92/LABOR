@@ -75,9 +75,10 @@ public class HealthBarController : MonoBehaviour
     {
         if (amount > 0)
         {
-            if (currentHealth - amount > 0)
+            int newHealth = currentHealth - amount;
+            if (newHealth > 0)
             {
-                if (currentHealth - amount < 30 && currentHealth >= 30)
+                if (newHealth < 30 && newHealth > 0 && currentHealth >= 30)
                 {
                     dieingSound.Play();
                     Debug.Log("Player hint: You're dieing");
