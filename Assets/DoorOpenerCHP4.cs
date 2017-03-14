@@ -6,6 +6,7 @@ public class DoorOpenerCHP4 : MonoBehaviour
     public PuzzleController puzzle;
     public float OpeningSpeed = 2f;
     public GameObject bigBlackBox;
+    public GameObject SmashingWalls;
     public Transform endPos;
     public bool isOpen = false;
     public AudioSource openSound;
@@ -19,6 +20,7 @@ public class DoorOpenerCHP4 : MonoBehaviour
         {
             isOpen = true;
             bigBlackBox.active = false;
+            SmashingWalls.active = true;
             opening = true;
             openSound.Play();
             //open the door
