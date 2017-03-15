@@ -13,7 +13,7 @@ public class Zombie : MonoBehaviour, Enemy
 
     private Animator animator;
     private Transform moveTarget;
-    private bool walking = false;
+    private bool idle = false;
     private bool attackingPlayer = false;
     private bool playerWasAttacked = false;
 
@@ -26,7 +26,7 @@ public class Zombie : MonoBehaviour, Enemy
 
     void Update()
     {
-        if (walking)
+        if (idle)
         {
             transform.position = Vector3.MoveTowards(transform.position, moveTarget.position, walkSpeed * Time.deltaTime);
             transform.LookAt(moveTarget);
@@ -41,7 +41,7 @@ public class Zombie : MonoBehaviour, Enemy
         {
             //Begin hitting the player
             animator.SetTrigger("attack");
-            walking = false;
+            idle = false;
             attackingPlayer = false;
             transform.LookAt(new Vector3(playerPosition.position.x, transform.position.y, playerPosition.position.z));
 
@@ -52,7 +52,7 @@ public class Zombie : MonoBehaviour, Enemy
                 playerHealth.decreaseHealth(damage);
             }
         }
-        else if (attackingPlayer == false && walking == false && playerWasAttacked == true)
+        else if (attackingPlayer == false && idle == false && playerWasAttacked == true)
         {
             Attack();
         }
@@ -61,7 +61,7 @@ public class Zombie : MonoBehaviour, Enemy
     public void WalkTo(Transform target)
     {
         animator.SetTrigger("walk");
-        walking = true;
+        idle = true;
         moveTarget = target;
     }
 
@@ -69,7 +69,7 @@ public class Zombie : MonoBehaviour, Enemy
     {
         animator.SetTrigger("die");
         Destroy(gameObject, 10f);
-        walking = false;
+        idle = false;
         attackingPlayer = false;
         playerWasAttacked = false;
     }
@@ -78,7 +78,7 @@ public class Zombie : MonoBehaviour, Enemy
     {
         playerWasAttacked = true;
         animator.SetTrigger("walk");
-        walking = false;
+        idle = false;
         attackingPlayer = true;
     }
 }
