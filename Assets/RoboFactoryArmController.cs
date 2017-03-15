@@ -1,20 +1,26 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using NewtonVR;
 
 public class RoboFactoryArmController : MonoBehaviour {
 
-    bool down =true;
-    bool up = false;
-    bool back = false;
-    bool bdown = false;
-    bool bup = false;
-    bool forward = false;
+    public float delayBetweenRounds = 4;
+    public GameObject wrist;
+    public GameObject boxPrefab; 
+    public Transform boxSpawningPosition;
+    public GameObject RobotPrefab;
+    public NVRHead player;
+    public HealthBarController playerHealth;
+
+    private bool down =true;
+    private bool up = false;
+    private bool forward = false;
+    private bool backward = false;
+    private bool backDown = false;
+    private bool bachUp = false;
     private Animator animator;
 
-    public GameObject wrist;
-    public AttachableBox box; 
+    private AttachableBox CurrentBox;
 
     void Start()
     {
@@ -26,87 +32,95 @@ public class RoboFactoryArmController : MonoBehaviour {
 
         if (down)
         {
-            StartCoroutine(waitdown());
-            Debug.Log("waitdown");
-
+            StartCoroutine(MoveDown());
         }
 
         if (up)
         {
-            StartCoroutine(waitup());
-            Debug.Log("waitup");
+            StartCoroutine(MoveUp());
         }
 
-        if (back)
+        if (backward)
         {
-            StartCoroutine(waitback());
-            Debug.Log("waitback");
+            StartCoroutine(MoveBack());
         }
 
-        if (bdown)
+        if (backDown)
         {
-            StartCoroutine(waitbdown());
-            Debug.Log("waitbdown");
+            StartCoroutine(MoveDownBackward());
         }
 
-        if (bup)
+        if (bachUp)
         {
-            StartCoroutine(waitbup());
-            Debug.Log("waitbup");
+            StartCoroutine(MoveUpBackward());
         }
 
         if (forward)
         {
-            StartCoroutine(waitforward());
-            Debug.Log("waitforward");
+            StartCoroutine(MoveForward());
         }
 
     }
-    IEnumerator waitdown()
+    IEnumerator MoveDown()
     {
         yield return new WaitForSeconds(2);
         down = false;
         up = true;
         animator.SetTrigger("up");
-        box.isAttached = false;
-        //Spawn new box
+        CurrentBox.isAttached = false;
+        Destroy(CurrentBox);
+        //if you have time: instantiate a short life particle sys
+        SpawnRobot();
+        SpawnNewBox();
     }
-    IEnumerator waitup()
+    IEnumerator MoveUp()
     {
         yield return new WaitForSeconds(2);
         up = false;
-        back = true;
+        backward = true;
         animator.SetTrigger("back");
     }
-    IEnumerator waitback()
+    IEnumerator MoveBack()
     {
         yield return new WaitForSeconds(2);
-        back = false;
-        bdown = true;
+        backward = false;
+        backDown = true;
         animator.SetTrigger("bdown");
     }
-    IEnumerator waitbdown()
+    IEnumerator MoveDownBackward()
     {
         yield return new WaitForSeconds(3);
-        bdown = false;
-        bup = true;
+        backDown = false;
+        bachUp = true;
         animator.SetTrigger("bup");
-        box.isAttached = true;
+        CurrentBox.isAttached = true;
     }
-    IEnumerator waitbup()
+    IEnumerator MoveUpBackward()
     {
-        yield return new WaitForSeconds(3);
-        bup = false;
+        yield return new WaitForSeconds(delayBetweenRounds);
+        bachUp = false;
         forward = true;
         animator.SetTrigger("forward");
     }
-    IEnumerator waitforward()
+    IEnumerator MoveForward()
     {
         yield return new WaitForSeconds(3);
         forward = false;
         down = true;
         animator.SetTrigger("down");
+    }
 
+    private void SpawnRobot()
+    {
+        GameObject spawnedRobot = Instantiate(RobotPrefab, CurrentBox.gameObject.transform.position, Quaternion.identity);
+        Robot robot = spawnedRobot.GetComponent<Robot>();
+        robot.RunToAndAttack(player.transform, playerHealth);
+    }
+
+    private void SpawnNewBox()
+    {
+        GameObject spawnedBox = Instantiate(boxPrefab, boxSpawningPosition);
+        CurrentBox = spawnedBox.GetComponent<AttachableBox>();
     }
 
 }

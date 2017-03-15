@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
-public class Robot : MonoBehaviour, Enemy {
+public class Robot : MonoBehaviour, Enemy
+{
 
     public float speed = 3.0f;
     public int damage = 20;
     public float secondsBetweenHits = 2;
-
+    public float autoAttackDistance;
     public AudioSource runSound;
 
     private Animator animations;
@@ -16,12 +17,15 @@ public class Robot : MonoBehaviour, Enemy {
     private bool attack = false;
     private float timeCounter = 0f;
 
+    private bool autoAttack = false;
+
     void Awake()
     {
         animations = GetComponent<Animator>();
     }
-	
-	void Update () {
+
+    void Update()
+    {
         if (run)
         {
             transform.LookAt(target);
@@ -38,7 +42,22 @@ public class Robot : MonoBehaviour, Enemy {
                 player.decreaseHealth(damage);
             }
         }
-	}
+        if (autoAttack)
+        {
+            if (Vector3.Distance(transform.position, player.transform.position) < autoAttackDistance)
+            {
+                if (!attack)
+                {
+                    attack = true;
+                    run = false;
+                }
+            }else if (attack)
+            {
+                attack = false;
+                run = true;
+            }
+        }
+    }
 
     public void RunTo(Transform playerHeadTransform)
     {
@@ -65,5 +84,10 @@ public class Robot : MonoBehaviour, Enemy {
         attack = false;
         animations.SetTrigger("Die");
         Destroy(gameObject, 3f);
+    }
+
+    public void RunToAndAttack(Transform playerHeadTransform, HealthBarController playerHealth)
+    {
+        autoAttack = true;
     }
 }
