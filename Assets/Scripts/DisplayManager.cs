@@ -38,6 +38,7 @@ public class DisplayManager : MonoBehaviour
         foreach (Text txt in chars)
         {
             txt.text = "";
+            currentIndex = 0;
         }
     }
 

@@ -8,18 +8,21 @@ public class ZombieFloater : MonoBehaviour {
     private float angle = 0;
     private float degrees = Mathf.PI / 180;
 
-    private Transform initialtransform;
-
+    private Vector3 initialtransform;
+    private bool moveUp = true;
 
     void Awake()
     {
-        initialtransform = transform;
+        initialtransform = transform.position;
     }
 
 	void Update () {
-        angle += speed * Time.deltaTime;
-        if (angle > 360)
-            angle -= 360;
-        transform.position = new Vector3(transform.position.x, floatinLimit * Mathf.Sin(angle * degrees), transform.position.z);
+
+        if (Mathf.Abs(initialtransform.y - transform.position.y) > floatinLimit)
+            moveUp = !moveUp;
+        if(moveUp)
+            transform.position = new Vector3(transform.position.x, transform.position.y + speed*Time.deltaTime, transform.position.z);
+        else
+            transform.position = new Vector3(transform.position.x, transform.position.y - speed * Time.deltaTime, transform.position.z);
     }
 }

@@ -4,43 +4,52 @@ using NewtonVR;
 public class ZombieCapsuleController : MonoBehaviour
 {
     public NVRHead player;
+    public HealthBarController playerHealth;
     public float secondsBeforeRelease = 15f;
     public GameObject floatingZombie;
     public GameObject attackingZombiePrefab;
     public GameObject CapsuleGlas;
     public bool isReleased = false;
     public Transform disablingEndPosition;
-    public float disblingspeed = 2;
+    public float disablingspeed = 2;
+    public Transform releasedZombiePosition;
 
-    public audioSource releaseSound;
-
+    public AudioSource releaseSound;
+    public bool isStarted = false;
     private bool disabling;
     private float counter = 0.0f;
 
     void Update()
     {
-        if (!isReleased && !disabling && counter > secondsBeforeRelease)
+        if (isStarted)
         {
-            ReleaseZombie();
-        }
-        else
-        {
-            counter += Time.deltaTime;
-        }
-        if (disabling)
-        {
-            floatingZombie.transform.position = Vector3.MoveTowards(transform.position, disablingEndPosition.position, disblingspeed*Time.delstaTime);
+            if (!isReleased && !disabling && counter > secondsBeforeRelease)
+            {
+                ReleaseZombie();
+            }
+            else
+            {
+                counter += Time.deltaTime;
+            }
+            if (floatingZombie && disabling)
+            {
+                floatingZombie.transform.position = Vector3.MoveTowards(transform.position, disablingEndPosition.position, disablingspeed * Time.deltaTime);
+            }
         }
     }
 
     private void ReleaseZombie()
     {
+        Debug.Log("Zombie Released");
         releaseSound.Play();
         isReleased = true;
         Destroy(CapsuleGlas);
-        GameObject releasedZombie = Instatiate(attackingZombiePrefab, floatingZombie.transform);
+        GameObject releasedZombie = Instantiate(attackingZombiePrefab, releasedZombiePosition.position, releasedZombiePosition.rotation);
         Zombie zombie = releasedZombie.GetComponent<Zombie>();
-        zombie.attack(player);
+        Debug.Log(" releasedZombie.GetComponent<Zombie>() " + zombie);
+        zombie.playerPosition = player.transform;
+        zombie.playerHealth = playerHealth;
+        zombie.Attack();
         Destroy(floatingZombie);
     }
 

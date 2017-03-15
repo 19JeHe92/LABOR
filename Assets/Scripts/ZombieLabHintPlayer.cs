@@ -20,6 +20,7 @@ public class ZombieLabHintPlayer : MonoBehaviour {
     public Transform generator;
     public NVRHead head;
     public float distanceToAnagrams = 3;
+    public AnagramChecker anagramsGame;
 
 
     private float counter;
@@ -54,6 +55,7 @@ public class ZombieLabHintPlayer : MonoBehaviour {
             Debug.Log("Playing Generator Sound");
             disableGeneratorSound.Play();
             wasdisableGeneratorSoundPlayed = true;
+            anagramsGame.StartGame();
         }
 	}
 

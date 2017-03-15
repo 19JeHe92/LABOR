@@ -28,13 +28,13 @@ public class ZombieLabController : MonoBehaviour {
         }
         if (freeZombie != null && freeZombie.transform.position == zombieWalkTo1.position)
         {
-            Debug.Log("Zombie reached position 1");
+            //Debug.Log("Zombie reached position 1");
             walkingToPosition2 = true;
             walkingToPosition1 = false;
         }
         else if(freeZombie != null && freeZombie.transform.position == zombieWalkTo2.position)
         {
-            Debug.Log("Zombie reached position 2");
+            //Debug.Log("Zombie reached position 2");
             walkingToPosition1 = true;
             walkingToPosition2 = false;
         }
@@ -42,7 +42,7 @@ public class ZombieLabController : MonoBehaviour {
         {
             freeZombie.WalkTo(zombieWalkTo1);
             walkingToPosition1 = true;
-            Debug.Log("Zombie walking to pos 1");
+            //Debug.Log("Zombie walking to pos 1");
             walkingToPosition1Called = true;
             walkingToPosition2Called = false;
         }
@@ -50,7 +50,7 @@ public class ZombieLabController : MonoBehaviour {
         {
             freeZombie.WalkTo(zombieWalkTo2);
             walkingToPosition2 = true;
-            Debug.Log("Zombie walking to pos 2");
+            //Debug.Log("Zombie walking to pos 2");
             walkingToPosition1Called = false;
             walkingToPosition2Called = true;
         }

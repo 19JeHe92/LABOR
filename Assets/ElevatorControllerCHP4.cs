@@ -11,7 +11,7 @@ public class ElevatorControllerCHP4 : MonoBehaviour {
     public AudioSource BreakDownSound;
     public AudioSource hintSound;
     public AudioSource coughSound;
-
+    public Transform smokeposition;
     public GameObject smokePrefab;
 
     private bool isStarted = false;
@@ -33,7 +33,10 @@ public class ElevatorControllerCHP4 : MonoBehaviour {
         {
             isBroken = true;
             BreakDownSound.Play();
-            Instantiate(smokePrefab);
+            ParticleSystem smokeParticles = Instantiate(smokePrefab, smokeposition.position, smokeposition.rotation).GetComponent<ParticleSystem>();
+            smokeParticles.transform.Rotate(0, 180, 0);
+            smokeParticles.Play();
+            smokeParticles.loop = true;
             cough = true;
         }
         if(!wasHintPlayed && timer > secondsBeforeHint)

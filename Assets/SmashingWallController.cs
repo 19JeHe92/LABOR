@@ -10,8 +10,8 @@ public class SmashingWallController : MonoBehaviour
     public Transform endPosLeft;
     public Transform endPosRight;
     public AudioSource smashSound;
-   // public NVRHead playerHead;
-    //public HealthBarController health;
+    public NVRHead playerHead;
+    public HealthBarController health;
 
     private bool moveToEndPos = true;
 
@@ -23,10 +23,11 @@ public class SmashingWallController : MonoBehaviour
         {
             isDeactivated = true;
         }
-        //else if (other == playerHead)
-        //{
-        //   // health.decreaseHealth(110);
-        //}
+        else if (other.tag.Equals("MainCamera"))
+        {
+            health.decreaseHealth(110);
+            Debug.Log("Die Motherfucker!!");
+        }
         else moveToEndPos = true;
     }
 

@@ -36,6 +36,15 @@ public class AnagramChecker : MonoBehaviour {
         button = GetComponent<NVRButton>();
     }
 
+    public void StartGame()
+    {
+        //TODO Play Ticking Sound
+        capsule1.isStarted = true;
+        capsule2.isStarted = true;
+        capsule3.isStarted = true;
+        capsule4.isStarted = true;
+    }
+
     void Update()
     {
         if (!sol1Light.active || !sol2Light.active || !sol3Light.active || !sol4Light.active)
@@ -51,18 +60,22 @@ public class AnagramChecker : MonoBehaviour {
         if (capsule1.isReleased)
         {
             sol1Light.active = true;
+            capsule1.DisableZombie();
         }
         if (capsule2.isReleased)
         {
             sol2Light.active = true;
+            capsule2.DisableZombie();
         }
         if (capsule3.isReleased)
         {
             sol3Light.active = true;
+            capsule3.DisableZombie();
         }
         if (capsule4.isReleased)
         {
             sol4Light.active = true;
+            capsule4.DisableZombie();
         }
         if (button.ButtonDown)
             CheckInput();
