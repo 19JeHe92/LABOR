@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class FinalBoss : MonoBehaviour//, Enemy
+public class FinalBoss : MonoBehaviour, Enemy
 {
+    private bool firstShout = false;
+
     private Animator animator;
     public AudioSource talk;
     public AudioSource shoutSound;
     public AudioSource getHitSound;
     public AudioSource dieSound;
 
-    public float damage = 10f;
+    public int damage = 10;
     public float SecondsBetweenHits = 2;
     public float hitLimit = 1f;
     private bool isHitting = false;
@@ -17,15 +19,18 @@ public class FinalBoss : MonoBehaviour//, Enemy
     public float walkSpeed = 2;
     public float turnSpeed = 0.2f;
 
-    public bool isImmune = true;
+    public bool isImmune = false;
 
-    private Transform Target;
+    public Transform Target;
     public HealthBarController playerHealth;
     private bool move;
     private bool turn;
     private float degreesTurned;
     private EnemyHealth health;
     private Transform initilalPosition;
+    private bool hastalked = false;
+    private bool attack = false;
+    private float timeCounter = 0;
 
     void Awake()
     {
@@ -37,26 +42,34 @@ public class FinalBoss : MonoBehaviour//, Enemy
     void Update()
     {
 
-        if(!isHitting && Vector3.Distance(Target.position, transform.position) < hitLimit)
+        if (!isHitting && Vector3.Distance(Target.position, transform.position) < hitLimit)
         {
             Hit();
-        }else if (isHitting && Vector3.Distance(Target.position, transform.position) >= hitLimit)
+            timeCounter += Time.deltaTime;
+            if (timeCounter > 2)
+            {
+                timeCounter = 0f;
+                playerHealth.decreaseHealth(damage);
+            }
+        }
+        else if (isHitting && Vector3.Distance(Target.position, transform.position) >= hitLimit)
         {
             isHitting = false;
             WalkTo(Target);
         }
 
-        if (isImmune && health.enabled)
-        {
-            health.enabled = false;
-        }
-        else if (!isImmune && !health.enabled)
-        {
-            health.enabled = true;
-        }
+        //if (isImmune && health.enabled)
+        //{
+        //    health.enabled = false;
+        //}
+        //else if (!isImmune && !health.enabled)
+        //{
+        //    health.enabled = true;
+        //}
         if (move)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Target.position, walkSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(Target.position.x, transform.position.y, Target.position.z), walkSpeed * Time.deltaTime);
+            transform.LookAt(new Vector3(Target.position.x, transform.position.y, Target.position.z));
         }
         if (turn)
         {
@@ -85,8 +98,12 @@ public class FinalBoss : MonoBehaviour//, Enemy
 
     public void Shout()
     {
-        animator.SetTrigger("shout");
-        shoutSound.Play();
+        if (!firstShout)
+        {
+            animator.SetTrigger("shout");
+            shoutSound.Play();
+            firstShout = true;
+        }
     }
 
     public void Hit()
@@ -99,15 +116,16 @@ public class FinalBoss : MonoBehaviour//, Enemy
     {
         Target = to;
         animator.SetTrigger("walk");
+        move = true;
     }
 
     public void GetHit()
     {
-        if (!isImmune)
-        {
+        //if (!isImmune)
+        //{
             animator.SetTrigger("gethit");
             getHitSound.Play();
-        }
+        //}
     }
 
     public void Die()
@@ -119,7 +137,11 @@ public class FinalBoss : MonoBehaviour//, Enemy
 
     public void Talk()
     {
-        talk.Play();
+        if (!hastalked)
+        {
+            talk.Play();
+            hastalked = true;
+        }
     }
 
     private IEnumerator WaitAndTurn(float seconds)
@@ -134,10 +156,19 @@ public class FinalBoss : MonoBehaviour//, Enemy
         StartCoroutine(SetTargetAfterSeconds(initilalPosition, seconds));
     }
 
-    private IEnumerator SetTargetAfterSeconds(Transform target,  float seconds)
+    private IEnumerator SetTargetAfterSeconds(Transform target, float seconds)
     {
         yield return new WaitForSeconds(seconds);
         this.Target = target;
     }
 
+    public void AttackPlayerUntilDead(Transform player)
+    {
+        WalkTo(player);
+        //if (!attack)
+        //{
+        //    attack = true;
+        //    move = true;
+        //}
+    }
 }

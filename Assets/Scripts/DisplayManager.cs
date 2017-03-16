@@ -18,7 +18,7 @@ public class DisplayManager : MonoBehaviour
     {
         if (currentIndex > 0)
         {
-            if(chars[currentIndex].text.Equals(""))
+            if (chars[currentIndex].text.Equals(""))
             {
                 currentIndex--;
             }
@@ -45,5 +45,17 @@ public class DisplayManager : MonoBehaviour
     public enum Characters
     {
         Q, W, E, R, T, Z, U, I, O, P, A, S, D, F, G, H, J, K, L, Y, X, C, V, B, N, M
+    }
+
+    public void ReceiveNumber(int num)
+    {
+        chars[currentIndex].text = num.ToString();
+        if (currentIndex < 8)
+            currentIndex++;
+    }
+
+    public enum Numbers
+    {
+        One = 1, Two = 2, Three = 3, Four = 4, Five = 5, Six = 6, Seven = 7, Eight = 8, Nine = 9, Zero = 0
     }
 }

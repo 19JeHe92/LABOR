@@ -11,6 +11,7 @@ public class RoboFactoryArmController : MonoBehaviour {
     public GameObject RobotPrefab;
     public NVRHead player;
     public HealthBarController playerHealth;
+    public Transform boxAttachPointPosition;
 
     private bool down =true;
     private bool up = false;
@@ -20,7 +21,7 @@ public class RoboFactoryArmController : MonoBehaviour {
     private bool bachUp = false;
     private Animator animator;
 
-    private AttachableBox CurrentBox;
+    public AttachableBox CurrentBox;
 
     void Start()
     {
@@ -120,6 +121,8 @@ public class RoboFactoryArmController : MonoBehaviour {
     private void SpawnNewBox()
     {
         GameObject spawnedBox = Instantiate(boxPrefab, boxSpawningPosition);
+        AttachableBox box = spawnedBox.GetComponent<AttachableBox>();
+        box.AttachPoint = boxAttachPointPosition;
         CurrentBox = spawnedBox.GetComponent<AttachableBox>();
     }
 

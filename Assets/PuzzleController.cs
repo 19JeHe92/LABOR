@@ -65,7 +65,6 @@ public class PuzzleController : MonoBehaviour
             if (roundNo == 6)
             {
                 solved = true;
-                Debug.Log("You're free to go");
                 ResetButtonColor();
             }
         }

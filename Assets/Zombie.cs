@@ -32,7 +32,7 @@ public class Zombie : MonoBehaviour, Enemy
             transform.LookAt(moveTarget);
         }
 
-        if (attackingPlayer)
+        if (attackingPlayer && Vector3.Distance(transform.position, playerPosition.position) > beginHitDistance)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(playerPosition.position.x, transform.position.y, playerPosition.position.z), walkSpeed * Time.deltaTime);
             transform.LookAt(new Vector3(playerPosition.position.x, transform.position.y, playerPosition.position.z));

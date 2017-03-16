@@ -12,9 +12,10 @@ public class Robot : MonoBehaviour, Enemy
 
     private Animator animations;
     private Vector3 target;
-    private HealthBarController player;
+    public HealthBarController player;
     private bool run = false;
     private bool attack = false;
+    //TeleporterDisabler disabler;
     private float timeCounter = 0f;
 
     private bool autoAttack = false;
@@ -44,7 +45,7 @@ public class Robot : MonoBehaviour, Enemy
         }
         if (autoAttack)
         {
-            if (Vector3.Distance(transform.position, player.transform.position) < autoAttackDistance)
+            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < autoAttackDistance)
             {
                 if (!attack)
                 {
@@ -70,6 +71,8 @@ public class Robot : MonoBehaviour, Enemy
 
     public void Attack(HealthBarController playerHealth)
     {
+        //disabler  = playerHealth.gameObject.GetComponent<TeleporterDisabler>();
+        //disabler.isAttacked = true;
         runSound.Stop();
         player = playerHealth;
         run = false;
@@ -79,6 +82,7 @@ public class Robot : MonoBehaviour, Enemy
 
     public void Die()
     {
+        //disabler.isAttacked = false;
         runSound.Stop();
         run = false;
         attack = false;
@@ -89,5 +93,6 @@ public class Robot : MonoBehaviour, Enemy
     public void RunToAndAttack(Transform playerHeadTransform, HealthBarController playerHealth)
     {
         autoAttack = true;
+        player = playerHealth;
     }
 }

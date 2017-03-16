@@ -21,7 +21,7 @@ public class RoboFloorLoader : MonoBehaviour {
             if (isWeaponFound && areAnagramsSolved)
             {
                 Debug.Log("Goodbye blue sky");
-                SceneManager.LoadScene("ChP3-RoboFloor");
+                SceneManager.LoadScene("ChP4-Smoke");
             }
             else if(!HintSound.isPlaying && !isWeaponFound)
             {

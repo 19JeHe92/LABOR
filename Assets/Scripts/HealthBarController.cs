@@ -8,6 +8,8 @@ public class HealthBarController : MonoBehaviour
     public float SecondsBeforeReturn = 3f;
     public GameObject greenPart;
     public AudioSource dieingSound;
+    public AudioSource ouchSound;
+    public AudioSource deadSound;
     public int initialHealth;
 
     private Vector3 initialScale;
@@ -73,6 +75,7 @@ public class HealthBarController : MonoBehaviour
 
     public void decreaseHealth(int amount)
     {
+        ouchSound.Play();
         if (amount > 0)
         {
             int newHealth = currentHealth - amount;
@@ -111,6 +114,7 @@ public class HealthBarController : MonoBehaviour
 
     private void Die()
     {
+        deadSound.Play();
         StartCoroutine(WaitAndReturn());
     }
 

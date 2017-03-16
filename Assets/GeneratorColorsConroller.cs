@@ -3,7 +3,8 @@ using UnityEngine;
 using NewtonVR;
 using UnityEngine.SceneManagement;
 
-public class GeneratorColorsConroller : MonoBehaviour {
+public class GeneratorColorsConroller : MonoBehaviour
+{
 
     public float secondsBeforeLoadNextScene = 3;
 
@@ -17,18 +18,25 @@ public class GeneratorColorsConroller : MonoBehaviour {
 
     private bool exploded = false;
 
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (!exploded && attachJoint1.AttachedItem.gameObject.tag == "CorrectTube1" && attachJoint2.AttachedItem.gameObject.tag == "CorrectTube2" && attachJoint3.AttachedItem.gameObject.tag == "CorrectTube3" && attachJoint4.AttachedItem.gameObject.tag == "CorrectTube4")
+    void Start()
+    {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (attachJoint1.AttachedItem && attachJoint2.AttachedItem && attachJoint1.AttachedItem && attachJoint1.AttachedItem)
         {
-            exploded = true;
-            Instantiate(explosion, explosionPosition);
+            Debug.Log("Somehting attached to all points");
+            if (!exploded && attachJoint1.AttachedItem.gameObject.tag == "CorrectTube1" && attachJoint2.AttachedItem.gameObject.tag == "CorrectTube2" && attachJoint3.AttachedItem.gameObject.tag == "CorrectTube3" && attachJoint4.AttachedItem.gameObject.tag == "CorrectTube4")
+            {
+                Debug.Log("Correct tubes attached");
+                exploded = true;
+                Instantiate(explosion, explosionPosition);
+                StartCoroutine(LoadSceneAfterSeconds());
+            }
         }
-	}
+    }
 
     private IEnumerator LoadSceneAfterSeconds()
     {

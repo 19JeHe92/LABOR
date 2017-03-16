@@ -16,6 +16,10 @@ public class EnemyHealth : MonoBehaviour
         {
             enemy = GetComponent<Zombie>();
         }
+        if (type == EnemyType.FinalBoss)
+        {
+            enemy = GetComponent<FinalBoss>();
+        }
     }
 
     void Update()

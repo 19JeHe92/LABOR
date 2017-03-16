@@ -2,100 +2,76 @@
 using NewtonVR;
 using UnityEngine.SceneManagement;
 
-public class FinalBattleController : MonoBehaviour {
+public class FinalBattleController : MonoBehaviour
+{
+    public NVRHead playerPosition;
+    public HealthBarController playerhealth;
 
-    public Transform player;
-    public HealthBarController playerHealth;
-    
     public FinalBoss boss;
-    public GameObject zombiePrefab;
-    public float secondsBeforeStart = 3f;
-    public float talkDuration = 5f;
-    public float secondsBeforeFirstRoundOfZombies = 20f;
-    public float secondsBossFirstAttack = 3;
 
-    public Transform ZombieSpawningPosition1;
-    public Transform ZombieSpawningPosition2;
-    public Transform ZombieSpawningPosition3;
-    public Transform ZombieSpawningPosition4;
-
-    private float timer = 0;
-    private bool isStarted = false;
-    private bool firstRoundStarted = false;
-    private bool secondRoundStarted = false;
-    private bool firstRoundComplete = false;
-
+    public GameObject Zombiepefab;
+    public Transform zombie1Pos;
+    public Transform zombie2Pos;
+    public Transform zombie3Pos;
+    public Transform zombie4Pos;
     private Zombie zombie1;
     private Zombie zombie2;
     private Zombie zombie3;
     private Zombie zombie4;
-    private Zombie zombie5;
-    private Zombie zombie6;
+    private bool areZombiesSpawn = false;
+    public float secondsBeforeTalkStart = 3;
+    public float secondsBeforeTurnAround = 46;
+    public float secondsBeforeShout = 50;
+    public float secondsBeforeBossAttack = 10;
 
-    private bool complete = false;
+    private float counter = 0;
 
-    void Awake()
+    void Update()
     {
-        boss.playerHealth = playerHealth;
-    }
-
-    void Update ()
-    {
-
-        if (boss == null && !complete)
+        counter += Time.deltaTime;
+        if (counter > secondsBeforeTalkStart)
         {
-            complete = true;
-            Debug.Log("GameComplete");
-            SceneManager.LoadScene("StudentRoom");
+            boss.Talk();
         }
-        timer += Time.deltaTime;
-        if(!isStarted && timer > secondsBeforeStart)
+        if (counter > secondsBeforeTurnAround)
         {
-            isStarted = true;
-            StartBattle();
-            timer = 0f;
+            boss.TurnAroundAfter(0);
         }
-        if (timer > secondsBeforeFirstRoundOfZombies)
+        if (counter > secondsBeforeShout)
         {
             boss.Shout();
-            SpawnFirstRoundZombies();
+            if (!areZombiesSpawn)
+            {
+                SpawnZombies();
+                areZombiesSpawn = true;
+            }
         }
-        if (firstRoundStarted && zombie1 == null && zombie2 == null && !firstRoundComplete)
+        if (counter > secondsBeforeBossAttack)
+            boss.AttackPlayerUntilDead(playerPosition.transform);
+        if(areZombiesSpawn && zombie1 == null && zombie2 == null && zombie3 == null && zombie4 == null)
         {
-            firstRoundComplete = true;
-            
-            boss.AttackPlayerAndGoBackAfterSeconds(player, secondsBossFirstAttack);
-        }
-        if (secondRoundStarted && zombie2 == null && zombie3 == null && !secondRoundComplete)
-        {
-            secondRoundComplete = true;
-            firstRoundComplete = true;
-            boss.pl
-            boss.AttackPlayerUntilDead(player);
+            SceneManager.LoadScene("StudentsRoom");
         }
     }
 
-    private void SpawnFirstRoundZombies()
+    private void SpawnZombies()
     {
-        GameObject zombie1 = Instantiate(zombiePrefab, ZombieSpawningPosition1);
-        GameObject zombie2 = Instantiate(zombiePrefab, ZombieSpawningPosition2);
-        //TODO make zombies attack hte player
-        firstRoundStarted = true;
-    }
-
-    private void SpawnSecondRoundZombies()
-    {
-        GameObject zombie3 = Instantiate(zombiePrefab, ZombieSpawningPosition1);
-        GameObject zombie4 = Instantiate(zombiePrefab, ZombieSpawningPosition2);
-        GameObject zombie5 = Instantiate(zombiePrefab, ZombieSpawningPosition3);
-        GameObject zombie6 = Instantiate(zombiePrefab, ZombieSpawningPosition4);
-        //TODO make zombies attack hte player
-        secondRoundStarted = true;
-    }
-
-    private void StartBattle()
-    {
-        boss.Talk();
-        boss.TurnAroundAfter(talkDuration);
+        Debug.Log("Instantiating zombies");
+        zombie1 = Instantiate(Zombiepefab, zombie1Pos.position, zombie1Pos.rotation).GetComponent<Zombie>();
+        zombie2 = Instantiate(Zombiepefab, zombie2Pos.position, zombie2Pos.rotation).GetComponent<Zombie>();
+        zombie3 = Instantiate(Zombiepefab, zombie3Pos.position, zombie3Pos.rotation).GetComponent<Zombie>();
+        zombie4 = Instantiate(Zombiepefab, zombie4Pos.position, zombie4Pos.rotation).GetComponent<Zombie>();
+        zombie1.playerHealth = playerhealth;
+        zombie1.playerPosition = playerPosition.gameObject.transform;
+        zombie1.Attack();
+        zombie2.playerHealth = playerhealth;
+        zombie2.playerPosition = playerPosition.gameObject.transform;
+        zombie2.Attack();
+        zombie3.playerHealth = playerhealth;
+        zombie3.playerPosition = playerPosition.gameObject.transform;
+        zombie3.Attack();
+        zombie4.playerHealth = playerhealth;
+        zombie4.playerPosition = playerPosition.gameObject.transform;
+        zombie4.Attack();
     }
 }
