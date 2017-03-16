@@ -8,6 +8,7 @@ public class CapsuleController : MonoBehaviour {
     public bool opening = false;
     public Transform up;
     public AudioSource openingSound;
+    public PlayerBlocker blocker;
 
 	void Awake () {
         openingSound = GetComponent<AudioSource>();
@@ -18,6 +19,7 @@ public class CapsuleController : MonoBehaviour {
     {
         yield return new WaitForSeconds(secondsBeforeOpen);
         opening = true;
+        blocker.blocked = false;
         openingSound.Play();
     }
 
