@@ -2,6 +2,7 @@
 using UnityEngine;
 using NewtonVR;
 
+//Handles the instantioation and effects of an explosion
 public class Explosion : MonoBehaviour {
 
     public AudioSource explosionSound;
@@ -20,6 +21,8 @@ public class Explosion : MonoBehaviour {
         Destroy(gameObject, maxLifeTime);
     }
 
+    //Calculates the damage applied to the Characters which are inside of the range of the explosion
+    //The near a Character is to the explosions middle is, the more damage it gets
     private float CalculateDamage(Vector3 targetPosition)
     {
         Vector3 distance = targetPosition - transform.position;
@@ -33,7 +36,7 @@ public class Explosion : MonoBehaviour {
         timeCounter += Time.deltaTime;
         if(timeCounter > secondsBeforeExplode)
         {
-            playerHealth.decreaseHealth(Convert.ToInt32(CalculateDamage(playerHealth.transform.position)));
+            playerHealth.DecreaseHealth(Convert.ToInt32(CalculateDamage(playerHealth.transform.position)));
             Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
 
             for (int i = 0; i < colliders.Length; i++)
@@ -50,7 +53,7 @@ public class Explosion : MonoBehaviour {
                 {
                     continue;
                 }
-                enemyHealth.decreaseHealth(Convert.ToInt32(CalculateDamage(targetRigidbody.position)));
+                enemyHealth.DecreaseHealth(Convert.ToInt32(CalculateDamage(targetRigidbody.position)));
             }
 
             explosionSound.gameObject.transform.parent = null;

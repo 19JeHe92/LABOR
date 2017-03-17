@@ -40,7 +40,7 @@ public class Robot : MonoBehaviour, Enemy
             if (timeCounter > secondsBetweenHits)
             {
                 timeCounter = 0f;
-                player.decreaseHealth(damage);
+                player.DecreaseHealth(damage);
             }
         }
         if (autoAttack)

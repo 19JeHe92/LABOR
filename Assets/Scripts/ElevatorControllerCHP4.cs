@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
+//Controls the elevator and the hinds and souns to be played.
 public class ElevatorControllerCHP4 : MonoBehaviour {
 
-    public float SecondsBeforeStart = 1;
+    public float secondsBeforeStart = 1;
     public float secondsBeforeBreakDown = 5;
     public float secondsBeforeHint = 10;
     public float secondsBetweenCoughs = 4;
 
     public AudioSource elevatorSound;
-    public AudioSource BreakDownSound;
+    public AudioSource breakDownSound;
     public AudioSource hintSound;
     public AudioSource coughSound;
     public Transform smokeposition;
@@ -24,7 +25,7 @@ public class ElevatorControllerCHP4 : MonoBehaviour {
 
 	void Update () {
         timer += Time.deltaTime;
-        if(!isStarted && timer > SecondsBeforeStart)
+        if(!isStarted && timer > secondsBeforeStart)
         {
             isStarted = true;
             elevatorSound.Play();
@@ -32,7 +33,7 @@ public class ElevatorControllerCHP4 : MonoBehaviour {
         if (!isBroken && timer > secondsBeforeBreakDown)
         {
             isBroken = true;
-            BreakDownSound.Play();
+            breakDownSound.Play();
             ParticleSystem smokeParticles = Instantiate(smokePrefab, smokeposition.position, smokeposition.rotation).GetComponent<ParticleSystem>();
             smokeParticles.transform.Rotate(0, 180, 0);
             smokeParticles.Play();

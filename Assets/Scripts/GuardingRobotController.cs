@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Controls the robots guarding the elevator doors
 public class GuardingRobotController : MonoBehaviour {
 
     public float attackDistance = 5;

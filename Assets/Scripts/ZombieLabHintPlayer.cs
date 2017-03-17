@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Plays hints in the zombie lab
 public class ZombieLabHintPlayer : MonoBehaviour {
 
     //InfectedSound

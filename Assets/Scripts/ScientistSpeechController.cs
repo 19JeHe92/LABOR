@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScientistSpeechController : MonoBehaviour
 {
-
     public float secondsBeforeSpeechStart = 10f; //30 seconds for you
 
     private AudioSource speechSound;

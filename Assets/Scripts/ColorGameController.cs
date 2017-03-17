@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//This is the controller for the Simon Game in the first Room
 public class ColorGameController : MonoBehaviour
 {
-
     public SimonButtons[] round1Sol;
     public SimonButtons[] round2Sol;
     public SimonButtons[] round3Sol;
@@ -24,6 +24,8 @@ public class ColorGameController : MonoBehaviour
     public AudioSource wonSound;
     public AudioSource buttonSound;
 
+    public bool isGameSolved = false;
+
     public DoorButtonSoundManager hintManager;
     public LightController lightController;
     public float speed = 0.8f;
@@ -31,7 +33,6 @@ public class ColorGameController : MonoBehaviour
 
     private NVRButton correctButton;
     private int roundNo = 0;
-    public bool isGameSolved = false;
     private bool isGameStarted = false;
     private bool isCounting = false;
     private bool areButtonsDisabled = false;
@@ -96,7 +97,7 @@ public class ColorGameController : MonoBehaviour
         currentSol = round1Sol;
     }
 
-    private void failed()
+    private void Failed()
     {
         failSound.Play();
         lightController.StartCoroutine("BlinkRed");
@@ -119,7 +120,7 @@ public class ColorGameController : MonoBehaviour
             DisableButtons();
             if (currentSol[currentIndex] != correct)
             {
-                failed();
+                Failed();
             }
             else
             {

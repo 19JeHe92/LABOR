@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Transmits the corresponding character to the display if a button is pressed
 public class CharacterTransmitter : MonoBehaviour {
 
     public DisplayManager displayManager;

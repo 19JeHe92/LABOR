@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Makes the robot in the first Chackpoint attack once the player opened the door
 public class CHP1RobotController : MonoBehaviour {
 
     public DoorOpener door;

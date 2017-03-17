@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Opens the elevators doors if it is enabled and the open button is pressed
 public class ElevatorDoorOpener : MonoBehaviour
 {
     public NVRButton openButton;

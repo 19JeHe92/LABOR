@@ -4,6 +4,8 @@ using System;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
+//This hasn't been used for the SGDC because we introduced checkpoints
+
 //This class is responsible for managing information about the games state which needs to be persisted 
 public class GameDataManager : MonoBehaviour {
 

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//Instantientes an explosion one a shell collides with something
 public class ShellExplosion : MonoBehaviour
 {
     public AudioSource explosionSound;
@@ -16,7 +17,7 @@ public class ShellExplosion : MonoBehaviour
     {
         EnemyHealth enemy = other.GetComponent<EnemyHealth>();
         if (enemy)
-            enemy.decreaseHealth(damage);
+            enemy.DecreaseHealth(damage);
         explosionSound.gameObject.transform.parent = null;
         explosionSound.Play();
         Instantiate(explosion, transform.position, Quaternion.identity);

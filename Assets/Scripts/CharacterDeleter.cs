@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Deletes characters from the display if the delete button is pressed
 public class CharacterDeleter : MonoBehaviour {
 
     public DisplayManager display;
@@ -16,7 +17,7 @@ public class CharacterDeleter : MonoBehaviour {
     {
         if (button.ButtonDown)
         {
-            display.deleteCharacter();
+            display.DeleteCharacter();
         }
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+//Drops a card if the robot is killed
 public class CardDropper : MonoBehaviour {
 
     public GameObject robot;

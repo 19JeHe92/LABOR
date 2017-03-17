@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Decreases the health of the player if he is not crawling
 public class PlayerNotCrawlingDetector : MonoBehaviour {
 
     public HealthBarController playerHealth;
@@ -10,7 +11,7 @@ public class PlayerNotCrawlingDetector : MonoBehaviour {
     {
         NVRHead playerHead = other.GetComponent<NVRHead>();
         if (playerHead)
-            playerHealth.decreaseHealth(penaltyAmount);
+            playerHealth.DecreaseHealth(penaltyAmount);
     }
 
 }

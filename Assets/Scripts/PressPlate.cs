@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//This is the conroller of a pressplate
+//A press plate is pressed if the player is above it (solved by Raycasting) or if a box is put on it
 public class PressPlate : MonoBehaviour
 {
 

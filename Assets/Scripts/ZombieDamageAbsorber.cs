@@ -19,7 +19,7 @@ public class ZombieDamageAbsorber : MonoBehaviour {
         {
             if (item.objectType == InventoryObjectType.Injection)
             {
-                health.decreaseHealth(injectionDamage);
+                health.DecreaseHealth(injectionDamage);
                 hitSound.Play();
                 Debug.Log("Decreased Zombies Health by " + injectionDamage);
             }

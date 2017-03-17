@@ -19,7 +19,7 @@ public class DamageAbsorber : MonoBehaviour {
         {
             if (item.objectType == InventoryObjectType.Knife)
             {
-                health.decreaseHealth(knifeDamage);
+                health.DecreaseHealth(knifeDamage);
                 hitSound.Play();
                 Debug.Log("Decreased Robots Health by " + knifeDamage);
             }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Loads the Generator Puzzle if the current puzzle is solved
 public class GeneratoPuzzleLoader : MonoBehaviour {
 
     public GameObject completeGlas;

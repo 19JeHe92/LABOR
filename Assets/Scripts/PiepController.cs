@@ -37,7 +37,7 @@ public class PiepController : MonoBehaviour {
         }
     }
 
-    private IEnumerator blinking()
+    private IEnumerator Blinking()
     {
         yield return new WaitForSeconds(secondsBeforeStart);
         while (true)

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+//Controls the lights of the simon game
 public class LightController : MonoBehaviour {
 
     public GameObject Light1;

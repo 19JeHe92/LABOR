@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//this is the controller for the Capsule in which zombies are held.
+//It can release or disable a zombie
 public class ZombieCapsuleController : MonoBehaviour
 {
     public NVRHead player;

@@ -2,6 +2,7 @@
 using NewtonVR;
 using System.Collections;
 
+//Opens the door in the first room is the card has been inserted and the correct combination has been entered
 public class DoorOpener : MonoBehaviour {
 
     public NVRButton button1;
@@ -9,11 +10,12 @@ public class DoorOpener : MonoBehaviour {
     public NVRButton button3;
     public NVRButton button4;
 
-    public GameObject TeleporterBlockingObject;
-    public GameObject CardLight;
-    public GameObject Combinationlight;
+    public GameObject teleporterBlockingObject;
+    public GameObject cardLight;
+    public GameObject combinationlight;
 
-    public NVRAttachPoint Card;
+    public NVRAttachPoint card;
+    public float speed = 0.2f;
 
     public bool isCorrectCombinationEntered = false;
     public bool isCardInserted = false;
@@ -22,24 +24,24 @@ public class DoorOpener : MonoBehaviour {
     public AudioSource openedSound;
 
     private int nrOfCorrectButtons = 0;
-    public float speed = 0.2f;
     private bool soundPlayed = false;
+
     private void Update()
     {
         if (isCardInserted && isCorrectCombinationEntered)
         {
             if (!soundPlayed)
             {
-                TeleporterBlockingObject.active = false;
+                teleporterBlockingObject.active = false;
                 openedSound.Play();
                 soundPlayed = true;
             }
             transform.position = Vector3.MoveTowards(transform.position, End.position, Time.deltaTime*speed);
         }
-        if (Card.IsAttached)
+        if (card.IsAttached)
         {
             isCardInserted = true;
-            CardLight.GetComponent<Renderer>().materials[1].color = Color.green;
+            cardLight.GetComponent<Renderer>().materials[1].color = Color.green;
         }
         if (button1.ButtonDown )
         {
@@ -83,7 +85,7 @@ public class DoorOpener : MonoBehaviour {
         {
             if (nrOfCorrectButtons == 3)
             {
-                Combinationlight.GetComponent<Renderer>().materials[1].color = Color.green;
+                combinationlight.GetComponent<Renderer>().materials[1].color = Color.green;
                 Debug.Log("Fourth correct Button");
                 isCorrectCombinationEntered = true;
             }
@@ -95,11 +97,12 @@ public class DoorOpener : MonoBehaviour {
         }
     }
 
+    //makes the light blink red if the pressed button is wrong
     private IEnumerator BlinkRed()
     {
-        Combinationlight.GetComponent<Renderer>().materials[1].color = Color.red;
+        combinationlight.GetComponent<Renderer>().materials[1].color = Color.red;
         yield return new WaitForSeconds(1);
-        Combinationlight.GetComponent<Renderer>().materials[1].color = Color.white;
+        combinationlight.GetComponent<Renderer>().materials[1].color = Color.white;
 
     }
 

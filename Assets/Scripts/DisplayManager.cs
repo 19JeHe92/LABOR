@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+//Thsi is the controller for the display
+//it can receive and delete chars and cler the display
 public class DisplayManager : MonoBehaviour
 {
     public Text[] chars;
@@ -14,7 +16,7 @@ public class DisplayManager : MonoBehaviour
             currentIndex++;
     }
 
-    public void deleteCharacter()
+    public void DeleteCharacter()
     {
         if (currentIndex > 0)
         {

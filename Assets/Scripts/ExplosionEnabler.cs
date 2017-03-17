@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+//Enables an explosion
+//It is used for bombs do that bomb ixplode only after certain time, and not directly when they collide
 public class ExplosionEnabler : MonoBehaviour {
 
     public AudioSource explosionSound;

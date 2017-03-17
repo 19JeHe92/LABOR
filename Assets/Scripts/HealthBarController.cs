@@ -3,6 +3,7 @@ using NewtonVR;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
+//Handles the health of the player and keeps the scaling of the green part ot the healt bar consistent to the players health
 public class HealthBarController : MonoBehaviour
 {
     public float SecondsBeforeReturn = 3f;
@@ -16,9 +17,6 @@ public class HealthBarController : MonoBehaviour
     private Vector3 currentScale;
     private Vector3 prevScale;
 
-    //public NVRButtons showHealthButton = NVRButtons.ApplicationMenu;
-    //public GameObject HealthBar;
-
     private int currentHealth = 100;
     public NVRHand Hand;
 
@@ -29,34 +27,14 @@ public class HealthBarController : MonoBehaviour
         prevScale = initialScale;
     }
 
-    private void LateUpdate()
-    {
-        //if (Hand.Inputs[showHealthButton].IsPressed == true)
-        //{
-        //    if (!HealthBar.active)
-        //    {
-        //        //Debug.Log("Show health!");
-        //        HealthBar.SetActive(true);
-        //    }
-        //}
-        //else if (HealthBar.active)
-        //{
-        //    // Debug.Log("Hide Health!");
-        //    HealthBar.SetActive(false);
-        //}
-
-    }
-
     void Update()
     {
-        //Vector3 newPosition = new Vector3(Hand.transform.position.x, Hand.transform.position.y + 0.04f, Hand.transform.position.z);
-        //transform.position = newPosition;
         transform.rotation = Hand.transform.rotation;
         transform.Rotate(90, 0, 0);
         transform.position = Hand.transform.position + (Hand.transform.up * 0.01f) - (Hand.transform.forward * 0.03f);
     }
 
-    public void increaseHealth(int amount)
+    public void IncreaseHealth(int amount)
     {
         if (amount > 0)
         {
@@ -73,7 +51,7 @@ public class HealthBarController : MonoBehaviour
         }
     }
 
-    public void decreaseHealth(int amount)
+    public void DecreaseHealth(int amount)
     {
         ouchSound.Play();
         if (amount > 0)

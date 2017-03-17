@@ -2,6 +2,8 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+//If a shell collides with the complete glas the bloken glas is instantiated and the complete glas is destroyed
 public class GlasBreaker : MonoBehaviour
 {
 

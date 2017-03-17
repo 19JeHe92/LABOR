@@ -49,7 +49,7 @@ public class FinalBoss : MonoBehaviour, Enemy
             if (timeCounter > 2)
             {
                 timeCounter = 0f;
-                playerHealth.decreaseHealth(damage);
+                playerHealth.DecreaseHealth(damage);
             }
         }
         else if (isHitting && Vector3.Distance(Target.position, transform.position) >= hitLimit)

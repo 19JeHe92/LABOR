@@ -3,6 +3,8 @@ using UnityEngine;
 using NewtonVR;
 using UnityEngine.SceneManagement;
 
+//This is the controller for a puzzle in which the player need to play a sequence of the imperial march 
+//We did not manage to integrate this script in the game (which is maybe a good think sinte it's written super inefficient)
 public class ImperialMarch : MonoBehaviour
 {
     public NVRButton playcompleteButton;

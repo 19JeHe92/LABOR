@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Controls the free zombie in the zombielab
 public class ZombieLabController : MonoBehaviour {
 
     public NVRHand handWithInventory;

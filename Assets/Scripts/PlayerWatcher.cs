@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//Makes the object (security camera) look at the player
 public class PlayerWatcher : MonoBehaviour {
 
     public Transform target;

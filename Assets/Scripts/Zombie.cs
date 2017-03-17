@@ -49,7 +49,7 @@ public class Zombie : MonoBehaviour, Enemy
             if (timeCounter > secondsBetweenHits)
             {
                 timeCounter = 0f;
-                playerHealth.decreaseHealth(damage);
+                playerHealth.DecreaseHealth(damage);
             }
         }
         else if (attackingPlayer == false && idle == false && playerWasAttacked == true)

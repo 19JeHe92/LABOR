@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Decreases the players health if the player collides with a laser
 public class Laser : MonoBehaviour
 {
     public HealthBarController playerhealth;
@@ -10,7 +11,7 @@ public class Laser : MonoBehaviour
     {
         if (other.gameObject.GetComponent<NVRHead>())
         {
-            playerhealth.decreaseHealth(damage);
+            playerhealth.DecreaseHealth(damage);
         }
     }
 }

@@ -2,6 +2,8 @@
 using NewtonVR;
 using UnityEngine.SceneManagement;
 
+//Conrols the final battle of the game
+//This script has been written the night before the deadline and is not finished yet
 public class FinalBattleController : MonoBehaviour
 {
     public NVRHead playerPosition;

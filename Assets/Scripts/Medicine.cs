@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Increases the player healths if the medicine is in the near of the players head
 public class Medicine : MonoBehaviour {
 
     public HealthBarController health;
@@ -15,7 +16,7 @@ public class Medicine : MonoBehaviour {
         if (curDistance < headDetected)
         {
             takePillsSound.Play();
-            health.increaseHealth(inceaseAmount);
+            health.IncreaseHealth(inceaseAmount);
             takePillsSound.transform.parent = null;
             Destroy(gameObject);
         }

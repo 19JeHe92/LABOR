@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 namespace NewtonVR
 {
+    //this is the controller for the brain of the player in the main menu
     public class InteractableBrain : NVRInteractableItem
     {
 

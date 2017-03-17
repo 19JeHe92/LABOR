@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Controles the plate wich comes out of the wall once the button is pressed
 public class ButtonBrickController : MonoBehaviour {
 
     public NVRButton button;
@@ -10,7 +11,6 @@ public class ButtonBrickController : MonoBehaviour {
 
     private bool comeOut;
 
-	// Update is called once per frame
 	void Update () {
         if (!comeOut && button.ButtonIsPushed)
         {

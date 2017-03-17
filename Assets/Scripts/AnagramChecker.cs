@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 using NewtonVR;
 
+//Checks if the Anagrams is the ZombieLab are solved
+//If tthe time is up, the Zombies are released from their Capsules
 public class AnagramChecker : MonoBehaviour {
 
     public string solution1;
@@ -47,6 +48,7 @@ public class AnagramChecker : MonoBehaviour {
 
     void Update()
     {
+        //If the anagrams are not solved play the c'mon sound periodically
         if (!sol1Light.active || !sol2Light.active || !sol3Light.active || !sol4Light.active)
         {
             counter += Time.deltaTime;
@@ -57,6 +59,7 @@ public class AnagramChecker : MonoBehaviour {
             }
         }
 
+        //If an anagram is solved disable one zombie
         if (capsule1.isReleased)
         {
             sol1Light.active = true;
@@ -81,37 +84,30 @@ public class AnagramChecker : MonoBehaviour {
             CheckInput();
     }
 
+    //Check if the entered Text solves one of the Anagrams
 	public void CheckInput()
     {
         string input = GetInput();
-        Debug.Log("Anagram Input: "+input +" "+ string.Compare(solution1, input, true));
+        //Debug.Log("Anagram Input: "+input +" "+ string.Compare(solution1, input, true));
         if (string.Compare(solution1, input, true)==0 && !sol1Light.active)
         {
-            Debug.Log("Anagram 1 solved");
-            sol1Light.active = true;
-            capsule1.DisableZombie();
-            correctAudio.Play();
+            // Debug.Log("Anagram 1 solved");
+            ResolveAnagram( capsule1, sol1Light);
         }
         else if(string.Compare(solution2, input, true) == 0 && !sol2Light.active)
         {
-            Debug.Log("Anagram 2 solved");
-            sol2Light.active = true;
-            capsule2.DisableZombie();
-            correctAudio.Play();
+            // Debug.Log("Anagram 2 solved");
+            ResolveAnagram(capsule2, sol2Light);
         }
         else if (string.Compare(solution3, input, true) == 0 && !sol3Light.active)
         {
-            Debug.Log("Anagram 3 solved");
-            sol3Light.active = true;
-            capsule3.DisableZombie();
-            correctAudio.Play();
+            // Debug.Log("Anagram 3 solved");
+            ResolveAnagram(capsule3, sol3Light);
         }
         else if (string.Compare(solution4, input, true) == 0 && !sol4Light.active)
         {
-            Debug.Log("Anagram 4 solved");
-            sol4Light.active = true;
-            capsule4.DisableZombie();
-            correctAudio.Play();
+            //Debug.Log("Anagram 4 solved");
+            ResolveAnagram(capsule4, sol4Light);
         }
         else
         {
@@ -124,6 +120,7 @@ public class AnagramChecker : MonoBehaviour {
         display.ClearDisplay();
     }
 
+    //Returns the characters input from the display
     private string GetInput()
     {
         string enteredChars = "";
@@ -132,5 +129,12 @@ public class AnagramChecker : MonoBehaviour {
             enteredChars += character.text;
         }
         return enteredChars;
+    }
+
+    private void ResolveAnagram(ZombieCapsuleController zombieCapsule, GameObject light)
+    {
+        light.active = true;
+        zombieCapsule.DisableZombie();
+        correctAudio.Play();
     }
 }

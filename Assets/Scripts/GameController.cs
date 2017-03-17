@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using NewtonVR;
 
+//Checks if both trigger buttons are pressed for 3 seconds and returns to the main scene if so
 public class GameController : MonoBehaviour {
 
     public NVRHand leftController;

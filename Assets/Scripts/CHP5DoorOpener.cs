@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 
+//Opens one side of the door is the attached PressPlate has been pressed
 public class CHP5DoorOpener : MonoBehaviour {
 
     public PressPlate enablerButton;
     public Transform EndPos;
-    private Vector3 Initialposition;
     public float openingSpeed = 0.2f;
 
+    private Vector3 Initialposition;
     private bool opening = false;
 
     void Start () {

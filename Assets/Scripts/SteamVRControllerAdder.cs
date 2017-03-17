@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//This class is needed to be able to use the Vive teleporter with newtonVR
+//It adds SteamVRs physical controllers at runtime
 public class SteamVRControllerAdder : MonoBehaviour {
 
     public NVRHand nvrHand;

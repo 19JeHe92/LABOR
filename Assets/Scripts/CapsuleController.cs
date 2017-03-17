@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
+//Controls the capsule in wich the player is held at the beginning of the game
 public class CapsuleController : MonoBehaviour {
 
     public float secondsBeforeOpen = 40;
@@ -15,6 +16,7 @@ public class CapsuleController : MonoBehaviour {
         StartCoroutine("Wait");
 	}
 	
+    //Wait until the scientist is done with his boring and way too log speech and then release the player
     IEnumerator Wait()
     {
         yield return new WaitForSeconds(secondsBeforeOpen);

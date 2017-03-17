@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//Moves a zombie up and down slowly
 public class ZombieFloater : MonoBehaviour {
 
     public float floatinLimit = 0.5f;

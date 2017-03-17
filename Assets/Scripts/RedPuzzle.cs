@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//This is the controller of the red puzzle of the generator
+//It checks if the correct buttons have been pressed
 
+
+//I bet this is the most intefficient schipt ever written, since it has a ton of if-else statements in it's Update function
+//Please do tell me how i could have solved it better/ Is there a way to use Callbacks?
 public class RedPuzzle : MonoBehaviour
 {
 

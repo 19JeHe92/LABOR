@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Plays a sound when the player interacts with the first hint in the room
 public class HintChecker : MonoBehaviour {
 
     public NVRInteractableItem hint1;

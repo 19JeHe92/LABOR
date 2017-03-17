@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using NewtonVR;
 
+//Alerts the hint manager that the card has been foun, so that the player does not get the hint anymore to find a card
 public class CardFound : MonoBehaviour {
 
     public DoorButtonSoundManager hintManager;

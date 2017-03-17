@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+//Disables the teleporter is the player is attacked
 public class TeleporterDisabler : MonoBehaviour {
 
     public bool isAttacked = false;

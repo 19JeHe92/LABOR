@@ -3,6 +3,7 @@ using NewtonVR;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
+//Loads the next scene if the player is near a point. We user this in the elevators
 public class PlayerDetector : MonoBehaviour {
 
     public NVRHead player;

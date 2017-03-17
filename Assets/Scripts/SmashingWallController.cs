@@ -25,7 +25,7 @@ public class SmashingWallController : MonoBehaviour
         }
         else if (other.tag.Equals("MainCamera"))
         {
-            health.decreaseHealth(110);
+            health.DecreaseHealth(110);
             Debug.Log("Die Motherfucker!!");
         }
         else moveToEndPos = true;
