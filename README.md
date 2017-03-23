@@ -8,9 +8,33 @@ Dropbox Link to Assets: https://www.dropbox.com/sh/brtyqk2u29frsv7/AACecSc1SX8YT
 # This game uses:</br>
 NewtonVR: https://github.com/TomorrowTodayLabs/NewtonVR</br>
 Flafla2's Vive Teleporter: https://github.com/Flafla2/Vive-Teleporter</br>
+Zombies: https://www.assetstore.unity3d.com/en/#!/content/30232</br>
+Muscled Muatant: https://www.assetstore.unity3d.com/en/#!/content/63197</br>
 
 # Here's the game in action:</br>
-Kill Zombies and solve Puzzles:</br>
-<img src="https://github.com/iszen/LABOR/blob/master/zombielab.gif"></br>
-
-# Can you escape?
+</br>
+Remove your brain to play this game. You won't need it anymore.</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/RemoveYourBrainToPlayThisGame.gif"></br>
+</br>
+Explore the Lab</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/ExploreTheLab.gif"></br>
+</br>
+Hope you're not afraid of heights.</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/HopeYouReNotAfraidOfHeight.gif"></br>
+</br>
+Lasers!</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/Lasers.gif"></br>
+</br>
+Solve puzzles</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/SolvePuzzles.gif"></br>
+</br>
+Solved :)</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/puzzleSolved.gif"></br>
+</br>
+Hope you're not afraid of darkness eighter</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/hopeyourenotafraidofdarknesseighter.gif"></br>
+</br>
+Kill it with fire!</br>
+<img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/killZombiesWithFire.gif"></br>
+</br>
+# ...can you escape?
