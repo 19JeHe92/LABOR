@@ -9,8 +9,8 @@ Dropbox Link to Assets: https://www.dropbox.com/sh/brtyqk2u29frsv7/AACecSc1SX8YT
 NewtonVR: https://github.com/TomorrowTodayLabs/NewtonVR</br>
 Flafla2's Vive Teleporter: https://github.com/Flafla2/Vive-Teleporter</br>
 
-#Here's the game in action:</br>
+# Here's the game in action:</br>
 Kill Zombies and solve Puzzles:</br>
 <img src="https://github.com/iszen/LABOR/blob/master/zombielab.gif"></br>
 
-#Can you escape?
+# Can you escape?
