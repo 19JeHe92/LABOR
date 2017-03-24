@@ -31,10 +31,10 @@ Solve puzzles</br>
 Solved :)</br>
 <img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/puzzleSolved.gif"></br>
 </br>
-Hope you're not afraid of darkness eighter</br>
+Hope you're not afraid of darkness either</br>
 <img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/hopeyourenotafraidofdarknesseighter.gif"></br>
 </br>
 Kill it with fire!</br>
 <img src="https://github.com/iszen/LABOR/blob/master/GIFsForGit/killZombiesWithFire.gif"></br>
 </br>
-# ...can you escape?
+<b> Can you escape? </b>
