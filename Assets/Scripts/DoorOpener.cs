@@ -14,7 +14,7 @@ public class DoorOpener : MonoBehaviour {
     public GameObject cardLight;
     public GameObject combinationlight;
 
-    public NVRAttachPoint card;
+    public NVRAttachJoint cardReader;
     public float speed = 0.2f;
 
     public bool isCorrectCombinationEntered = false;
@@ -38,7 +38,7 @@ public class DoorOpener : MonoBehaviour {
             }
             transform.position = Vector3.MoveTowards(transform.position, End.position, Time.deltaTime*speed);
         }
-        if (card.IsAttached)
+        if (cardReader.AttachedPoint.gameObject.tag == "Card")
         {
             isCardInserted = true;
             cardLight.GetComponent<Renderer>().materials[1].color = Color.green;

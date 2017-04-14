@@ -41,13 +41,13 @@ public class InventoryItemSpawner : MonoBehaviour
                 ExplosionEnabler rocket = prefabToSpawn.GetComponent<ExplosionEnabler>();
                 if (rocket)
                 {
-                    rocket.playerHealth = GameObject.Find("LeftHand").GetComponent<HealthBarController>();
+                    rocket.playerHealth = leftHand.GetComponent<HealthBarController>();
                 }
                 Medicine med = prefabToSpawn.GetComponent<Medicine>();
                 if (med)
                 {
                     Debug.Log("Spawned Medicine in hand");
-                    med.health = GameObject.Find("LeftHand").GetComponent<HealthBarController>();
+                    med.health = leftHand.GetComponent<HealthBarController>();
                     med.head = GameObject.Find("Head").GetComponent<NVRHead>();
                 }
                 PickableItem item = spawnedObject.GetComponent<PickableItem>();

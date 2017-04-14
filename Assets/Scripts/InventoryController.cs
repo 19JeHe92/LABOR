@@ -76,7 +76,10 @@ public class InventoryController : MonoBehaviour
             {
                 InventoryObject.SetActive(true);
                 InventoryObject.transform.position = connectedHand.transform.position;
-                InventoryObject.transform.rotation = connectedHand.transform.rotation;
+                float xRot = InventoryObject.transform.localRotation.x;
+                float yRot = connectedHand.transform.localRotation.y;
+                float zRot = connectedHand.transform.rotation.z;
+                InventoryObject.transform.rotation = new Quaternion(xRot, yRot, zRot, 1);
             }
             else
             {

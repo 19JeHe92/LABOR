@@ -21,7 +21,7 @@ public class RoboFactoryArmController : MonoBehaviour {
     private bool bachUp = false;
     private Animator animator;
 
-    public AttachableBox CurrentBox;
+  //  public AttachableBox CurrentBox;
 
     void Start()
     {
@@ -67,9 +67,9 @@ public class RoboFactoryArmController : MonoBehaviour {
         yield return new WaitForSeconds(2);
         down = false;
         up = true;
-        animator.SetTrigger("up");
-        CurrentBox.isAttached = false;
-        Destroy(CurrentBox);
+        //animator.SetTrigger("up");
+        //CurrentBox.isAttached = false;
+        //Destroy(CurrentBox);
         //if you have time: instantiate a short life particle sys
         SpawnRobot();
         SpawnNewBox();
@@ -94,7 +94,7 @@ public class RoboFactoryArmController : MonoBehaviour {
         backDown = false;
         bachUp = true;
         animator.SetTrigger("bup");
-        CurrentBox.isAttached = true;
+      //  CurrentBox.isAttached = true;
     }
     IEnumerator MoveUpBackward()
     {
@@ -113,17 +113,17 @@ public class RoboFactoryArmController : MonoBehaviour {
 
     private void SpawnRobot()
     {
-        GameObject spawnedRobot = Instantiate(RobotPrefab, CurrentBox.gameObject.transform.position, Quaternion.identity);
-        Robot robot = spawnedRobot.GetComponent<Robot>();
-        robot.RunToAndAttack(player.transform, playerHealth);
+        //GameObject spawnedRobot = Instantiate(RobotPrefab, CurrentBox.gameObject.transform.position, Quaternion.identity);
+        //Robot robot = spawnedRobot.GetComponent<Robot>();
+        //robot.RunToAndAttack(player.transform, playerHealth);
     }
 
     private void SpawnNewBox()
     {
         GameObject spawnedBox = Instantiate(boxPrefab, boxSpawningPosition);
-        AttachableBox box = spawnedBox.GetComponent<AttachableBox>();
-        box.AttachPoint = boxAttachPointPosition;
-        CurrentBox = spawnedBox.GetComponent<AttachableBox>();
+     //   AttachableBox box = spawnedBox.GetComponent<AttachableBox>();
+     //   box.AttachPoint = boxAttachPointPosition;
+     //   CurrentBox = spawnedBox.GetComponent<AttachableBox>();
     }
 
 }

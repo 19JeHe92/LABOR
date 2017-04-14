@@ -4,8 +4,9 @@
 public class EnemyHealth : MonoBehaviour
 {
     public int health = 100;
-    public Enemy enemy;
     public EnemyType type;
+
+    private Enemy enemy;
 
     private void Awake()
     {
@@ -35,6 +36,9 @@ public class EnemyHealth : MonoBehaviour
     public void DecreaseHealth(int amount)
     {
         if (amount > 0)
+        {
             health -= amount;
+            enemy.GetHit();
+        }
     }
 }

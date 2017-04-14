@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using NewtonVR;
+using System;
 
 public class Zombie : MonoBehaviour, Enemy
 {
@@ -80,5 +81,10 @@ public class Zombie : MonoBehaviour, Enemy
         animator.SetTrigger("walk");
         idle = false;
         attackingPlayer = true;
+    }
+
+    public void GetHit()
+    {
+        throw new NotImplementedException();
     }
 }

@@ -14,7 +14,7 @@ public class NumberSolutionsChecker : MonoBehaviour
     public int solution4;
 
     public DisplayManager display;
-    public PinkPuzzle puzzle;
+   // public PinkPuzzle puzzle;
 
     public GameObject sol1Light;
     public GameObject sol2Light;
@@ -61,7 +61,7 @@ public class NumberSolutionsChecker : MonoBehaviour
         }
         if (sol1Light.active && sol2Light.active && sol3Light.active && sol4Light.active)
         {
-            puzzle.solved = true;
+         //   puzzle.solved = true;
         }
         display.ClearDisplay();
     }

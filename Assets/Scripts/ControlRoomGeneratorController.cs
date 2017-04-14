@@ -7,7 +7,7 @@ public class ControlRoomGeneratorController : MonoBehaviour {
     public YellowPuzzle yellowpuzzle;
     public PuzzleController greenpuzzle;
     public RedPuzzle redpuzzle;
-    public PinkPuzzle pinkpuzzle;
+//    public PinkPuzzle pinkpuzzle;
 
     public AudioSource generatorDownSound;
     private bool down = false;
@@ -15,11 +15,11 @@ public class ControlRoomGeneratorController : MonoBehaviour {
     public NVRButton buttonToNextScene;
 
     void Update () {
-		if(!down && yellowpuzzle.solved && greenpuzzle.solved && redpuzzle.solved && pinkpuzzle.solved)
-        {
-            down = true;
-            PlaySounds();
-        }
+		//if(!down && yellowpuzzle.solved && greenpuzzle.solved && redpuzzle.solved && pinkpuzzle.solved)
+  //      {
+  //          down = true;
+  //          PlaySounds();
+  //      }
 	}
 
     private void PlaySounds()

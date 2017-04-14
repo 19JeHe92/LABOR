@@ -1,98 +1,96 @@
 ﻿using UnityEngine;
-using NewtonVR;
 
 public class Robot : MonoBehaviour, Enemy
 {
 
-    public float speed = 3.0f;
     public int damage = 20;
-    public float secondsBetweenHits = 2;
-    public float autoAttackDistance;
+    public float secondsBetweenHits = 2.0f;
+    public float attackDistance = 1.0f;
+    public float startKickingDistance = 0.2f;
+
+    public HealthBarController playerHealth;
+    public GameObject player;
     public AudioSource runSound;
+    public TeleporterDisabler disabler;
 
     private Animator animations;
     private Vector3 target;
-    public HealthBarController player;
-    private bool run = false;
-    private bool attack = false;
-    //TeleporterDisabler disabler;
+    private bool hitting = false;
+    private bool running = false;
     private float timeCounter = 0f;
-
-    private bool autoAttack = false;
+    private RobotMovement robotMovement;
 
     void Awake()
     {
         animations = GetComponent<Animator>();
+        robotMovement = GetComponent<RobotMovement>();
     }
 
     void Update()
     {
-        if (run)
+        if (Vector3.Distance(gameObject.transform.position, playerHealth.transform.position) < attackDistance)
         {
-            transform.LookAt(target);
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            if (!running && !hitting)
+            {
+                Run();
+            }
+            else if (Vector3.Distance(gameObject.transform.position, playerHealth.gameObject.transform.position) < startKickingDistance && !hitting)
+            {
+                Attack();
+            }
+            else
+            {
+                Run();
+            }
         }
 
-        if (attack)
+        if (hitting)
         {
             transform.LookAt(target);
             timeCounter += Time.deltaTime;
             if (timeCounter > secondsBetweenHits)
             {
                 timeCounter = 0f;
-                player.DecreaseHealth(damage);
-            }
-        }
-        if (autoAttack)
-        {
-            if (Vector3.Distance(transform.position, player.gameObject.transform.position) < autoAttackDistance)
-            {
-                if (!attack)
-                {
-                    attack = true;
-                    run = false;
-                }
-            }else if (attack)
-            {
-                attack = false;
-                run = true;
+                playerHealth.DecreaseHealth(damage);
             }
         }
     }
 
-    public void RunTo(Transform playerHeadTransform)
+    public void Run()
     {
+        robotMovement.RunTo(player.transform);
+
+        disabler = player.GetComponent<TeleporterDisabler>();
+        disabler.isAttacked = true;
+
         runSound.loop = true;
         runSound.Play();
-        target = new Vector3(playerHeadTransform.position.x, 0, playerHeadTransform.position.z);
-        animations.SetTrigger("run");
-        run = true;
+
+        animations.SetBool("run", true);
+
+        running = true;
+        hitting = false;
     }
 
-    public void Attack(HealthBarController playerHealth)
+    public void Attack()
     {
-        //disabler  = playerHealth.gameObject.GetComponent<TeleporterDisabler>();
-        //disabler.isAttacked = true;
         runSound.Stop();
-        player = playerHealth;
-        run = false;
-        attack = true;
-        animations.SetTrigger("attack");
+        animations.SetBool("kick", true);
+
+        running = false;
+        hitting = true;
     }
 
     public void Die()
     {
-        //disabler.isAttacked = false;
+        disabler.isAttacked = false;
         runSound.Stop();
-        run = false;
-        attack = false;
-        animations.SetTrigger("Die");
-        Destroy(gameObject, 3f);
+        hitting = false;
+        animations.SetBool("die", true);
     }
 
-    public void RunToAndAttack(Transform playerHeadTransform, HealthBarController playerHealth)
+    public void GetHit()
     {
-        autoAttack = true;
-        player = playerHealth;
+        animations.SetBool("gethit", true);
     }
 }
